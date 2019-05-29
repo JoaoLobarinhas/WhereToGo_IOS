@@ -29,7 +29,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        
+        if textField == usernamelbl{
+            usernamelbl.resignFirstResponder()
+            passwordlbl.becomeFirstResponder()
+        }else{
+            textField.resignFirstResponder()
+        }
+        
         
         return true
     }

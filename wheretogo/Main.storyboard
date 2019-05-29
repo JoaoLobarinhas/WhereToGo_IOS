@@ -23,19 +23,23 @@
                                 <rect key="frame" x="0.0" y="10" width="320" height="568"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t3J-rz-nFG">
-                                        <rect key="frame" x="85" y="208" width="150" height="30"/>
+                                        <rect key="frame" x="35" y="246" width="250" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="Dh7-aL-j6b"/>
+                                            <constraint firstAttribute="height" constant="40" id="ATB-Ur-Lyj"/>
+                                            <constraint firstAttribute="width" constant="250" id="Dh7-aL-j6b"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" textContentType="username"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="email"/>
                                         <connections>
                                             <outlet property="delegate" destination="h1m-cy-5rn" id="e86-TS-c1g"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k94-wu-NZv">
-                                        <rect key="frame" x="85" y="276" width="150" height="30"/>
+                                        <rect key="frame" x="35" y="296" width="250" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="xI7-cH-EGU"/>
+                                        </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -44,21 +48,38 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKl-0O-62a">
-                                        <rect key="frame" x="141" y="341" width="38" height="30"/>
-                                        <state key="normal" title="Login"/>
+                                        <rect key="frame" x="35" y="371" width="250" height="40"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="m3j-Ce-yAH"/>
+                                        </constraints>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="login:" destination="h1m-cy-5rn" eventType="touchUpInside" id="LmT-wR-Jxo"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_login" translatesAutoresizingMaskIntoConstraints="NO" id="fu9-4k-W19">
+                                        <rect key="frame" x="96" y="85" width="128" height="128"/>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="t3J-rz-nFG" firstAttribute="centerX" secondItem="kaD-Pv-5e1" secondAttribute="centerX" id="0jx-nZ-jgl"/>
-                                    <constraint firstItem="k94-wu-NZv" firstAttribute="top" secondItem="t3J-rz-nFG" secondAttribute="bottom" constant="38" id="Bvs-Bp-Urf"/>
-                                    <constraint firstItem="t3J-rz-nFG" firstAttribute="top" secondItem="kaD-Pv-5e1" secondAttribute="top" constant="208" id="GeX-is-E12"/>
+                                    <constraint firstItem="IKl-0O-62a" firstAttribute="width" secondItem="k94-wu-NZv" secondAttribute="width" id="2FK-MA-aI4"/>
+                                    <constraint firstItem="fu9-4k-W19" firstAttribute="top" secondItem="kaD-Pv-5e1" secondAttribute="top" constant="85" id="6k0-ju-EBl"/>
+                                    <constraint firstItem="k94-wu-NZv" firstAttribute="top" secondItem="t3J-rz-nFG" secondAttribute="bottom" constant="10" id="Bvs-Bp-Urf"/>
                                     <constraint firstItem="IKl-0O-62a" firstAttribute="centerX" secondItem="kaD-Pv-5e1" secondAttribute="centerX" id="IlD-ty-Hkz"/>
                                     <constraint firstAttribute="trailing" secondItem="t3J-rz-nFG" secondAttribute="trailing" constant="84" id="MaB-k4-QRI"/>
+                                    <constraint firstItem="fu9-4k-W19" firstAttribute="centerX" secondItem="kaD-Pv-5e1" secondAttribute="centerX" id="QxP-tz-Dkk"/>
                                     <constraint firstItem="k94-wu-NZv" firstAttribute="width" secondItem="t3J-rz-nFG" secondAttribute="width" id="TP5-oC-dyi"/>
                                     <constraint firstItem="k94-wu-NZv" firstAttribute="centerX" secondItem="kaD-Pv-5e1" secondAttribute="centerX" id="TS0-ai-jvl"/>
+                                    <constraint firstItem="t3J-rz-nFG" firstAttribute="top" secondItem="fu9-4k-W19" secondAttribute="bottom" constant="33" id="f7Y-Tq-QE0"/>
                                     <constraint firstItem="IKl-0O-62a" firstAttribute="top" secondItem="k94-wu-NZv" secondAttribute="bottom" constant="35" id="mW9-kh-nFn"/>
                                     <constraint firstAttribute="bottom" secondItem="IKl-0O-62a" secondAttribute="bottom" constant="197" id="nGU-NJ-APd"/>
                                 </constraints>
@@ -81,7 +102,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpv-80-de8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-16.875" y="-185.91549295774649"/>
+            <point key="canvasLocation" x="495" y="-166"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_login" width="128" height="128"/>
+    </resources>
 </document>
