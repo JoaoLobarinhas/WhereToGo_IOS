@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -15,17 +16,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernamelbl: UITextField!
     @IBOutlet weak var passwordlbl: UITextField!
+    @IBOutlet weak var erroMessage: UILabel!
     
+    @IBOutlet weak var loader: UIActivityIndicatorView!
+    @IBOutlet weak var btnLogin: UIButton!
     
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    var ref:DatabaseReference?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ref = Database.database().reference()
+        /*self.ref?.child("users").child("jaPbkxC9WXaIcgyFMLgGppDsc4A3")
+            .setValue(["nome": "Paulo", "tipo": "Tecnico", "id": "jaPbkxC9WXaIcgyFMLgGppDsc4A3", "email": "paulo@paulo.pt"])*/
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
+        self.erroMessage.isHidden = true;
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -51,11 +61,29 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func login(_ sender: UIButton) {
+        loader.isHidden = false
         Auth.auth().signIn(withEmail: usernamelbl.text!, password: passwordlbl.text!) { user, error in
             if error == nil && user != nil {
-                print("Login feito")
+                
+                let userID = Auth.auth().currentUser?.uid
+                self.ref?.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    self.loader.isHidden = true
+                    let value = snapshot.value as? NSDictionary
+                    let tipo = value?["tipo"] as? String ?? ""
+                    if(tipo == "Administrador"){
+                        self.performSegue(withIdentifier: "Segue_Admin", sender: self.btnLogin)
+                    }else{
+                        self.performSegue(withIdentifier: "Tecnico_Segue", sender: self.btnLogin)
+                    }
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
+                
             } else {
-                print("Error logging in: \(error!.localizedDescription)")
+                self.erroMessage.text = "Credenciais incorretas"
+                self.erroMessage.isHidden = false;
+                self.loader.isHidden = true
             }
         }
     }

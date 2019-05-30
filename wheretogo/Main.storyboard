@@ -22,7 +22,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kaD-Pv-5e1">
                                 <rect key="frame" x="0.0" y="10" width="320" height="568"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t3J-rz-nFG">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="paulo@paulo.pt" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t3J-rz-nFG">
                                         <rect key="frame" x="35" y="246" width="250" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ATB-Ur-Lyj"/>
@@ -35,7 +35,7 @@
                                             <outlet property="delegate" destination="h1m-cy-5rn" id="e86-TS-c1g"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k94-wu-NZv">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="paulo123" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k94-wu-NZv">
                                         <rect key="frame" x="35" y="296" width="250" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="xI7-cH-EGU"/>
@@ -68,10 +68,20 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_login" translatesAutoresizingMaskIntoConstraints="NO" id="fu9-4k-W19">
                                         <rect key="frame" x="96" y="85" width="128" height="128"/>
                                     </imageView>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDr-Iu-6eR">
+                                        <rect key="frame" x="141" y="475" width="38" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hFr-mG-tNK">
+                                        <rect key="frame" x="150" y="436" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="t3J-rz-nFG" firstAttribute="centerX" secondItem="kaD-Pv-5e1" secondAttribute="centerX" id="0jx-nZ-jgl"/>
                                     <constraint firstItem="IKl-0O-62a" firstAttribute="width" secondItem="k94-wu-NZv" secondAttribute="width" id="2FK-MA-aI4"/>
+                                    <constraint firstItem="VDr-Iu-6eR" firstAttribute="top" secondItem="hFr-mG-tNK" secondAttribute="bottom" constant="19" id="3dC-3y-lXw"/>
                                     <constraint firstItem="fu9-4k-W19" firstAttribute="top" secondItem="kaD-Pv-5e1" secondAttribute="top" constant="85" id="6k0-ju-EBl"/>
                                     <constraint firstItem="k94-wu-NZv" firstAttribute="top" secondItem="t3J-rz-nFG" secondAttribute="bottom" constant="10" id="Bvs-Bp-Urf"/>
                                     <constraint firstItem="IKl-0O-62a" firstAttribute="centerX" secondItem="kaD-Pv-5e1" secondAttribute="centerX" id="IlD-ty-Hkz"/>
@@ -79,9 +89,12 @@
                                     <constraint firstItem="fu9-4k-W19" firstAttribute="centerX" secondItem="kaD-Pv-5e1" secondAttribute="centerX" id="QxP-tz-Dkk"/>
                                     <constraint firstItem="k94-wu-NZv" firstAttribute="width" secondItem="t3J-rz-nFG" secondAttribute="width" id="TP5-oC-dyi"/>
                                     <constraint firstItem="k94-wu-NZv" firstAttribute="centerX" secondItem="kaD-Pv-5e1" secondAttribute="centerX" id="TS0-ai-jvl"/>
+                                    <constraint firstItem="hFr-mG-tNK" firstAttribute="top" secondItem="IKl-0O-62a" secondAttribute="bottom" constant="25" id="XuU-lU-hph"/>
+                                    <constraint firstItem="VDr-Iu-6eR" firstAttribute="centerX" secondItem="kaD-Pv-5e1" secondAttribute="centerX" id="aN2-Nt-i7c"/>
                                     <constraint firstItem="t3J-rz-nFG" firstAttribute="top" secondItem="fu9-4k-W19" secondAttribute="bottom" constant="33" id="f7Y-Tq-QE0"/>
+                                    <constraint firstItem="hFr-mG-tNK" firstAttribute="centerX" secondItem="kaD-Pv-5e1" secondAttribute="centerX" id="kgW-eY-2PA"/>
                                     <constraint firstItem="IKl-0O-62a" firstAttribute="top" secondItem="k94-wu-NZv" secondAttribute="bottom" constant="35" id="mW9-kh-nFn"/>
-                                    <constraint firstAttribute="bottom" secondItem="IKl-0O-62a" secondAttribute="bottom" constant="197" id="nGU-NJ-APd"/>
+                                    <constraint firstAttribute="bottom" secondItem="VDr-Iu-6eR" secondAttribute="bottom" constant="80" id="qwl-Xc-kzA"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -95,14 +108,35 @@
                         <viewLayoutGuide key="safeArea" id="VE2-An-nh1"/>
                     </view>
                     <connections>
+                        <outlet property="btnLogin" destination="IKl-0O-62a" id="1uE-0a-Rih"/>
+                        <outlet property="erroMessage" destination="VDr-Iu-6eR" id="I0M-fb-o6n"/>
+                        <outlet property="loader" destination="hFr-mG-tNK" id="sqD-by-FbE"/>
                         <outlet property="passwordlbl" destination="k94-wu-NZv" id="CV5-tx-Tuf"/>
                         <outlet property="scrollView" destination="kaD-Pv-5e1" id="Cvc-9J-bCm"/>
                         <outlet property="usernamelbl" destination="t3J-rz-nFG" id="F09-oF-FfG"/>
+                        <segue destination="vEa-O0-BvB" kind="show" identifier="Segue_Admin" id="03a-NU-RMo"/>
+                        <segue destination="kYo-DX-lmC" kind="show" identifier="Tecnico_Segue" id="Epf-ml-lAV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpv-80-de8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="495" y="-166"/>
+            <point key="canvasLocation" x="495" y="-166.90140845070422"/>
+        </scene>
+        <!--Admin_storyboard-->
+        <scene sceneID="bjm-J8-0dh">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Admin_storyboard" storyboardName="Admin" referencedIdentifier="Admin_storyboard" id="vEa-O0-BvB" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uDK-Qj-pPi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1094" y="-282"/>
+        </scene>
+        <!--Tecnico_storyboard-->
+        <scene sceneID="XpU-2T-YIf">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Tecnico_storyboard" storyboardName="Tecnico" referencedIdentifier="Tecnico_storyboard" id="kYo-DX-lmC" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NSv-gq-7CI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1102" y="-65"/>
         </scene>
     </scenes>
     <resources>
