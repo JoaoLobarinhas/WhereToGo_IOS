@@ -13,6 +13,7 @@
 		70BF0DF7229DD06500EF2237 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70BF0DF5229DD06500EF2237 /* LaunchScreen.storyboard */; };
 		70BF0DFF229DD32500EF2237 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70BF0DFE229DD32500EF2237 /* GoogleService-Info.plist */; };
 		70BF0E01229DF1AD00EF2237 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70BF0E00229DF1AD00EF2237 /* Main.storyboard */; };
+		70CCBED922A71BC300491331 /* Auxiliar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CCBED822A71BC300491331 /* Auxiliar.swift */; };
 		70D497B2229F2A8A00FD8AD6 /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70D497B1229F2A8A00FD8AD6 /* Admin.storyboard */; };
 		70D497B4229F2B7300FD8AD6 /* Tecnico.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70D497B3229F2B7300FD8AD6 /* Tecnico.storyboard */; };
 		70D497BC229F2E4F00FD8AD6 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D497BB229F2E4F00FD8AD6 /* AdminViewController.swift */; };
@@ -32,6 +33,7 @@
 		70BF0DF8229DD06500EF2237 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70BF0DFE229DD32500EF2237 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		70BF0E00229DF1AD00EF2237 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		70CCBED822A71BC300491331 /* Auxiliar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auxiliar.swift; sourceTree = "<group>"; };
 		70D497B1229F2A8A00FD8AD6 /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
 		70D497B3229F2B7300FD8AD6 /* Tecnico.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tecnico.storyboard; sourceTree = "<group>"; };
 		70D497BB229F2E4F00FD8AD6 /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		70BF0DEB229DD06400EF2237 /* wheretogo */ = {
 			isa = PBXGroup;
 			children = (
+				70CCBED722A71BA100491331 /* Geral */,
 				70D497C0229F355C00FD8AD6 /* Tecnico */,
 				70D497BF229F354C00FD8AD6 /* Admin */,
 				70BF0DEC229DD06400EF2237 /* AppDelegate.swift */,
@@ -94,6 +97,14 @@
 				70BF0E00229DF1AD00EF2237 /* Main.storyboard */,
 			);
 			path = wheretogo;
+			sourceTree = "<group>";
+		};
+		70CCBED722A71BA100491331 /* Geral */ = {
+			isa = PBXGroup;
+			children = (
+				70CCBED822A71BC300491331 /* Auxiliar.swift */,
+			);
+			path = Geral;
 			sourceTree = "<group>";
 		};
 		70D497BF229F354C00FD8AD6 /* Admin */ = {
@@ -267,6 +278,7 @@
 			files = (
 				70D497BC229F2E4F00FD8AD6 /* AdminViewController.swift in Sources */,
 				70BF0DEF229DD06400EF2237 /* ViewController.swift in Sources */,
+				70CCBED922A71BC300491331 /* Auxiliar.swift in Sources */,
 				70D497C4229F4E2A00FD8AD6 /* AdminMainPage.swift in Sources */,
 				70D497BE229F2F0000FD8AD6 /* TecnicoViewController.swift in Sources */,
 				70BF0DED229DD06400EF2237 /* AppDelegate.swift in Sources */,
@@ -410,6 +422,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C24B2KW93W;
 				INFOPLIST_FILE = wheretogo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -429,6 +442,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C24B2KW93W;
 				INFOPLIST_FILE = wheretogo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

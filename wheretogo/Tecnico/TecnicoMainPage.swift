@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class TecnicoMainPage: UITabBarController{
     
@@ -23,23 +24,49 @@ class TecnicoMainPage: UITabBarController{
         tabBarIteam = (self.tabBar.items?[0])!
         tabBarIteam.image = DeSelectedImageAssign
         tabBarIteam.selectedImage = selectedImageAssign
+        tabBarIteam.title = "Serviços"
         
-        let selectedImageAdd = UIImage(named: "assignments_blue")?.withRenderingMode(.alwaysOriginal)
-        let DeSelectedImageAdd = UIImage(named: "assignments_grey")?.withRenderingMode(.alwaysOriginal)
+        let selectedImageAdd = UIImage(named: "map_blue")?.withRenderingMode(.alwaysOriginal)
+        let DeSelectedImageAdd = UIImage(named: "map_grey")?.withRenderingMode(.alwaysOriginal)
         tabBarIteam = (self.tabBar.items?[1])!
         tabBarIteam.image = DeSelectedImageAdd
         tabBarIteam.selectedImage = selectedImageAdd
+        tabBarIteam.title = "Mapa"
         
-        let selectedImageAdds = UIImage(named: "assignments_blue")?.withRenderingMode(.alwaysOriginal)
-        let DeSelectedImageAdds = UIImage(named: "assignments_grey")?.withRenderingMode(.alwaysOriginal)
-        tabBarIteam = (self.tabBar.items?[2])!
-        tabBarIteam.image = DeSelectedImageAdds
-        tabBarIteam.selectedImage = selectedImageAdds
         
         // initaial tab bar index
-        self.selectedIndex = 2
-        
-        // Do any additional setup after loading the view.
+        self.selectedIndex = 0
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        let btnLogOut = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(TecnicoMainPage.logOut))
+        self.navigationItem.rightBarButtonItem = btnLogOut
+    }
+    
+    @IBAction func logOut() {
+        let alert = UIAlertController(title: "Confirmação", message: "Quer mesmo terminar a sua sessão?", preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "Sim", style: UIAlertActionStyle.default, handler: {
+            (_)in
+            try! Auth.auth().signOut()
+            let window = UIApplication.shared.keyWindow!
+            let frame = window.rootViewController!.view.frame
+            
+            let controller = UIStoryboard(name: "Main", bundle: nil)
+                .instantiateViewController(withIdentifier: "navigationInicial")
+            
+            controller.view.frame = frame
+            
+            UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                window.rootViewController = controller
+            }, completion: { completed in
+               
+            })
+        })
+        alert.addAction(OKAction)
+        alert.addAction(UIAlertAction(title: "Não", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,14 +76,3 @@ class TecnicoMainPage: UITabBarController{
     
 }
 
-extension UIImage {
-    class func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
-        let rect: CGRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        color.setFill()
-        UIRectFill(rect)
-        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return image
-    }
-}
