@@ -14,6 +14,8 @@
 		70BF0DFF229DD32500EF2237 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70BF0DFE229DD32500EF2237 /* GoogleService-Info.plist */; };
 		70BF0E01229DF1AD00EF2237 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70BF0E00229DF1AD00EF2237 /* Main.storyboard */; };
 		70CCBED922A71BC300491331 /* Auxiliar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CCBED822A71BC300491331 /* Auxiliar.swift */; };
+		70CCBEDB22A7346C00491331 /* ServicesAdminTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CCBEDA22A7346C00491331 /* ServicesAdminTableViewCell.swift */; };
+		70CCBEDD22A73A2D00491331 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CCBEDC22A73A2D00491331 /* Service.swift */; };
 		70D497B2229F2A8A00FD8AD6 /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70D497B1229F2A8A00FD8AD6 /* Admin.storyboard */; };
 		70D497B4229F2B7300FD8AD6 /* Tecnico.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70D497B3229F2B7300FD8AD6 /* Tecnico.storyboard */; };
 		70D497BC229F2E4F00FD8AD6 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D497BB229F2E4F00FD8AD6 /* AdminViewController.swift */; };
@@ -34,6 +36,8 @@
 		70BF0DFE229DD32500EF2237 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		70BF0E00229DF1AD00EF2237 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		70CCBED822A71BC300491331 /* Auxiliar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auxiliar.swift; sourceTree = "<group>"; };
+		70CCBEDA22A7346C00491331 /* ServicesAdminTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesAdminTableViewCell.swift; sourceTree = "<group>"; };
+		70CCBEDC22A73A2D00491331 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		70D497B1229F2A8A00FD8AD6 /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
 		70D497B3229F2B7300FD8AD6 /* Tecnico.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tecnico.storyboard; sourceTree = "<group>"; };
 		70D497BB229F2E4F00FD8AD6 /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				70CCBED822A71BC300491331 /* Auxiliar.swift */,
+				70CCBEDC22A73A2D00491331 /* Service.swift */,
 			);
 			path = Geral;
 			sourceTree = "<group>";
@@ -113,6 +118,7 @@
 				70D497B1229F2A8A00FD8AD6 /* Admin.storyboard */,
 				70D497BB229F2E4F00FD8AD6 /* AdminViewController.swift */,
 				70D497C3229F4E2A00FD8AD6 /* AdminMainPage.swift */,
+				70CCBEDA22A7346C00491331 /* ServicesAdminTableViewCell.swift */,
 			);
 			name = Admin;
 			sourceTree = "<group>";
@@ -281,7 +287,9 @@
 				70CCBED922A71BC300491331 /* Auxiliar.swift in Sources */,
 				70D497C4229F4E2A00FD8AD6 /* AdminMainPage.swift in Sources */,
 				70D497BE229F2F0000FD8AD6 /* TecnicoViewController.swift in Sources */,
+				70CCBEDD22A73A2D00491331 /* Service.swift in Sources */,
 				70BF0DED229DD06400EF2237 /* AppDelegate.swift in Sources */,
+				70CCBEDB22A7346C00491331 /* ServicesAdminTableViewCell.swift in Sources */,
 				F6DB2C6122A6873D00DFF340 /* TecnicoMainPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
