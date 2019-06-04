@@ -19,6 +19,7 @@
 		70D497BE229F2F0000FD8AD6 /* TecnicoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D497BD229F2F0000FD8AD6 /* TecnicoViewController.swift */; };
 		70D497C4229F4E2A00FD8AD6 /* AdminMainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D497C3229F4E2A00FD8AD6 /* AdminMainPage.swift */; };
 		AF16B77280BC6A831E762DBB /* Pods_wheretogo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F157C2447BC51F800066D5 /* Pods_wheretogo.framework */; };
+		F6DB2C6122A6873D00DFF340 /* TecnicoMainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DB2C6022A6873D00DFF340 /* TecnicoMainPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		70D497C3229F4E2A00FD8AD6 /* AdminMainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMainPage.swift; sourceTree = "<group>"; };
 		86F157C2447BC51F800066D5 /* Pods_wheretogo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wheretogo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3836F454078CA1A1314BF4C /* Pods-wheretogo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wheretogo.release.xcconfig"; path = "Target Support Files/Pods-wheretogo/Pods-wheretogo.release.xcconfig"; sourceTree = "<group>"; };
+		F6DB2C6022A6873D00DFF340 /* TecnicoMainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TecnicoMainPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			children = (
 				70D497B3229F2B7300FD8AD6 /* Tecnico.storyboard */,
 				70D497BD229F2F0000FD8AD6 /* TecnicoViewController.swift */,
+				F6DB2C6022A6873D00DFF340 /* TecnicoMainPage.swift */,
 			);
 			path = Tecnico;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				70D497C4229F4E2A00FD8AD6 /* AdminMainPage.swift in Sources */,
 				70D497BE229F2F0000FD8AD6 /* TecnicoViewController.swift in Sources */,
 				70BF0DED229DD06400EF2237 /* AppDelegate.swift in Sources */,
+				F6DB2C6122A6873D00DFF340 /* TecnicoMainPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
