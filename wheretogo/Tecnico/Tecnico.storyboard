@@ -127,8 +127,6 @@
                                             <outlet property="btnCancelar" destination="CTi-SD-VHZ" id="9sq-Fd-EMk"/>
                                             <outlet property="btnConcluido" destination="r38-PL-PWU" id="XeH-Jh-KMK"/>
                                             <outlet property="labelMorada" destination="LsY-kO-vPK" id="Nqd-WM-Cpd"/>
-                                            <outlet property="lblData" destination="RyR-pN-Bd5" id="yEE-Rs-yNV"/>
-                                            <outlet property="lblServico" destination="6wd-Cl-jWe" id="azp-qk-wH2"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
