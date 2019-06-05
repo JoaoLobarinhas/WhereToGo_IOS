@@ -11,10 +11,12 @@ import UIKit
 class TecnicoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var labelMorada: UILabel!
-    @IBOutlet weak var lblData: UILabel!
-    @IBOutlet weak var lblServico: UILabel!
+    @IBOutlet weak var labelData: UILabel!
+    @IBOutlet weak var labelServico: UILabel!
+    @IBOutlet weak var labelEstado: UILabel!
     @IBOutlet weak var btnConcluido: UIButton!
     @IBOutlet weak var btnCancelar: UIButton!
+    @IBOutlet weak var imageEstado: UIImageView!
     
     
     override func awakeFromNib() {
@@ -24,10 +26,11 @@ class TecnicoTableViewCell: UITableViewCell {
         btnCancelar.layer.borderWidth = 1
         btnCancelar.layer.borderColor = UIColor.red.cgColor
         
-        btnCancelar.backgroundColor = .clear
-        btnCancelar.layer.cornerRadius = 5
-        btnCancelar.layer.borderWidth = 1
-        btnCancelar.layer.borderColor = UIColor.init(red: 0, green: 122, blue: 255, alpha: 1).cgColor
+        btnConcluido.backgroundColor = .clear
+        btnConcluido.layer.cornerRadius = 5
+        btnConcluido.layer.borderWidth = 1
+        btnConcluido.layer.borderColor = UIColor.blue.cgColor
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
