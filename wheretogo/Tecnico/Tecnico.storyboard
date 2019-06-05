@@ -54,7 +54,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RyR-pN-Bd5">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RyR-pN-Bd5">
                                                     <rect key="frame" x="15" y="36" width="175" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="pjo-uP-EwP"/>
@@ -63,8 +63,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="serviço" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wd-Cl-jWe">
-                                                    <rect key="frame" x="15" y="69" width="151" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="serviço" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wd-Cl-jWe">
+                                                    <rect key="frame" x="15" y="69" width="129" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -86,8 +86,8 @@
                                                         <constraint firstAttribute="height" constant="42" id="SOn-vq-0sS"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Estado" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r56-YV-ZrW">
-                                                    <rect key="frame" x="264" y="69" width="71" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estado" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r56-YV-ZrW">
+                                                    <rect key="frame" x="262" y="69" width="74" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -110,6 +110,10 @@
                                                 <constraint firstItem="r56-YV-ZrW" firstAttribute="top" secondItem="B2Z-vq-Rec" secondAttribute="bottom" constant="8" id="82g-cG-714"/>
                                                 <constraint firstItem="r38-PL-PWU" firstAttribute="top" secondItem="6wd-Cl-jWe" secondAttribute="bottom" constant="8" id="8bW-KC-Fbb"/>
                                                 <constraint firstItem="LsY-kO-vPK" firstAttribute="top" secondItem="xMb-GR-HQh" secondAttribute="top" constant="5" id="Cn6-vt-KXl"/>
+                                                <constraint firstItem="r56-YV-ZrW" firstAttribute="centerX" secondItem="B2Z-vq-Rec" secondAttribute="centerX" id="D9X-5L-zMa"/>
+                                                <constraint firstItem="RyR-pN-Bd5" firstAttribute="trailing" secondItem="CTi-SD-VHZ" secondAttribute="trailing" id="F7t-m7-CKg"/>
+                                                <constraint firstItem="r56-YV-ZrW" firstAttribute="leading" secondItem="6wd-Cl-jWe" secondAttribute="trailing" constant="118" id="IGj-fm-JDJ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="r56-YV-ZrW" secondAttribute="trailing" constant="24" id="IvG-Wn-dPQ"/>
                                                 <constraint firstItem="CTi-SD-VHZ" firstAttribute="leading" secondItem="r38-PL-PWU" secondAttribute="trailing" constant="4" id="JvV-gJ-an1"/>
                                                 <constraint firstItem="B2Z-vq-Rec" firstAttribute="top" secondItem="xMb-GR-HQh" secondAttribute="top" constant="19" id="NHN-Mj-fgj"/>
                                                 <constraint firstAttribute="trailing" secondItem="B2Z-vq-Rec" secondAttribute="trailing" constant="53" id="agE-zh-MIO"/>
