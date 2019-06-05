@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MaterialComponents.MaterialButtons
+import MaterialComponents.MaterialButtons_Theming
 
 class TecnicoTableViewCell: UITableViewCell {
 
@@ -14,22 +16,20 @@ class TecnicoTableViewCell: UITableViewCell {
     @IBOutlet weak var labelData: UILabel!
     @IBOutlet weak var labelServico: UILabel!
     @IBOutlet weak var labelEstado: UILabel!
-    @IBOutlet weak var btnConcluido: UIButton!
-    @IBOutlet weak var btnCancelar: UIButton!
+    @IBOutlet weak var btnConcluido: MDCButton!
+    @IBOutlet weak var btnCancelar: MDCButton!
+    
     @IBOutlet weak var imageEstado: UIImageView!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        btnCancelar.backgroundColor = .clear
-        btnCancelar.layer.cornerRadius = 5
-        btnCancelar.layer.borderWidth = 1
-        btnCancelar.layer.borderColor = UIColor.red.cgColor
         
-        btnConcluido.backgroundColor = .clear
-        btnConcluido.layer.cornerRadius = 5
-        btnConcluido.layer.borderWidth = 1
-        btnConcluido.layer.borderColor = UIColor.blue.cgColor
+        let containerScheme = MDCContainerScheme()
+        containerScheme.colorScheme.primaryColor = UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+        btnConcluido.applyContainedTheme(withScheme: containerScheme)
+        btnCancelar.applyOutlinedTheme(withScheme: containerScheme)
+        btnCancelar.setBorderColor(UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1), for: .normal)
         
     }
 
