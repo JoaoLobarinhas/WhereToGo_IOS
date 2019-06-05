@@ -37,6 +37,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 print(child)
             }
         }*/
+        print("pilinha")
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
