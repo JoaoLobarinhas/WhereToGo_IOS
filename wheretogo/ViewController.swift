@@ -49,6 +49,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 print(coord?.value(forKey: "longitude"))*/
                 
                 print(dictionary["coordenadas"]!["latitude"])
+                print("PINHEIRO E REI")
                 
             }
             
