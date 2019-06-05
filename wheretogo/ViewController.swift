@@ -31,6 +31,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         ref = Database.database().reference()
         /*self.ref?.child("users").child("jaPbkxC9WXaIcgyFMLgGppDsc4A3")
             .setValue(["nome": "Paulo", "tipo": "Tecnico", "id": "jaPbkxC9WXaIcgyFMLgGppDsc4A3", "email": "paulo@paulo.pt"])*/
+        
+        /*self.ref?.child("servico").observe(.value) { snapshot in
+            for child in snapshot.children {
+                print(child)
+            }
+        }*/
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
