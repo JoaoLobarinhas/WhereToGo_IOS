@@ -29,8 +29,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         ref = Database.database().reference()
-        /*self.ref?.child("users").child("jaPbkxC9WXaIcgyFMLgGppDsc4A3")
-            .setValue(["nome": "Paulo", "tipo": "Tecnico", "id": "jaPbkxC9WXaIcgyFMLgGppDsc4A3", "email": "paulo@paulo.pt"])*/
+        /*self.ref?.child("users").child("tDREuicczZgLyBsZ4JUeqedI19j2")
+            .setValue(["nome": "Lobarinhas", "tipo": "Tecnico", "id": "tDREuicczZgLyBsZ4JUeqedI19j2", "email": "lobarinhas@pinheiro.pt"])*/
         
         self.ref?.child("servico").observe(.childAdded, with: { (snapshot) in
             
