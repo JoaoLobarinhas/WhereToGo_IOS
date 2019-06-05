@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import MaterialComponents.MaterialButtons
+import MaterialComponents.MaterialButtons_Theming
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -19,7 +21,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var erroMessage: UILabel!
     
     @IBOutlet weak var loader: UIActivityIndicatorView!
-    @IBOutlet weak var btnLogin: UIButton!
+    @IBOutlet weak var btnLogin: MDCButton!
+    
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -27,6 +30,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let containerScheme = MDCContainerScheme()
+        containerScheme.colorScheme.primaryColor = UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+        btnLogin.applyOutlinedTheme(withScheme: containerScheme)
+        btnLogin.setBorderColor(UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1), for: .normal)
         
         ref = Database.database().reference()
         /*self.ref?.child("users").child("tDREuicczZgLyBsZ4JUeqedI19j2")
@@ -85,7 +93,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func login(_ sender: UIButton) {
+    
+    
+    @IBAction func login(_ sender: Any) {
         loader.isHidden = false
         Auth.auth().signIn(withEmail: usernamelbl.text!, password: passwordlbl.text!) { user, error in
             if error == nil && user != nil {

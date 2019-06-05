@@ -52,7 +52,7 @@
                                                         <constraint firstAttribute="width" constant="40" id="R2q-QB-hwx"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmS-cR-tCY">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmS-cR-tCY" customClass="MDCButton">
                                                     <rect key="frame" x="286" y="117" width="77" height="30"/>
                                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
@@ -91,7 +91,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQA-wh-P1d">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQA-wh-P1d" customClass="MDCButton">
                                                     <rect key="frame" x="188" y="117" width="77" height="30"/>
                                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
@@ -126,6 +126,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="btnCancelar" destination="qmS-cR-tCY" id="e0p-KP-TP2"/>
+                                            <outlet property="btnRealocar" destination="lQA-wh-P1d" id="aXb-Wa-6fK"/>
                                             <outlet property="imageUser" destination="1AX-Pe-Zba" id="Kg9-Gi-C2k"/>
                                             <outlet property="labelData" destination="lq2-pm-mxt" id="ce1-v5-Kix"/>
                                             <outlet property="labelDesc" destination="jUD-1E-WmP" id="RTC-Ai-qs5"/>
@@ -156,7 +158,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rJz-40-05o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="344.80000000000001" y="-642.72863568215894"/>
+            <point key="canvasLocation" x="737" y="-663"/>
         </scene>
         <!--Admin Main Page-->
         <scene sceneID="itp-aL-zYB">

@@ -11,5 +11,7 @@ pod 'Firebase/Database'
 pod 'FirebaseUI/Auth'
 pod 'Firebase/Auth'
 pod 'CodableFirebase'
+pod 'MaterialComponents/Buttons'
+pod 'MaterialComponents/Buttons+Theming'
 
 end

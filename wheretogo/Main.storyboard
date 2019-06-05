@@ -47,7 +47,7 @@
                                             <outlet property="delegate" destination="h1m-cy-5rn" id="Ucn-cD-Iox"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKl-0O-62a">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKl-0O-62a" customClass="MDCButton">
                                         <rect key="frame" x="35" y="371" width="250" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -62,7 +62,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="login:" destination="h1m-cy-5rn" eventType="touchUpInside" id="LmT-wR-Jxo"/>
+                                            <action selector="login:" destination="h1m-cy-5rn" eventType="touchUpInside" id="RiD-Mw-pNi"/>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_login" translatesAutoresizingMaskIntoConstraints="NO" id="fu9-4k-W19">
@@ -109,7 +109,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="dlf-7L-Lxn"/>
                     <connections>
-                        <outlet property="btnLogin" destination="IKl-0O-62a" id="1uE-0a-Rih"/>
+                        <outlet property="btnLogin" destination="IKl-0O-62a" id="Pj6-1f-CUL"/>
                         <outlet property="erroMessage" destination="VDr-Iu-6eR" id="I0M-fb-o6n"/>
                         <outlet property="loader" destination="hFr-mG-tNK" id="sqD-by-FbE"/>
                         <outlet property="passwordlbl" destination="k94-wu-NZv" id="CV5-tx-Tuf"/>
