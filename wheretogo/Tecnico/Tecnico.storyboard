@@ -126,11 +126,16 @@
                                         <connections>
                                             <outlet property="btnCancelar" destination="CTi-SD-VHZ" id="9sq-Fd-EMk"/>
                                             <outlet property="btnConcluido" destination="r38-PL-PWU" id="XeH-Jh-KMK"/>
+                                            <outlet property="imageEstado" destination="B2Z-vq-Rec" id="g9Y-kI-VQu"/>
+                                            <outlet property="labelData" destination="RyR-pN-Bd5" id="4nK-EX-S4j"/>
+                                            <outlet property="labelEstado" destination="r56-YV-ZrW" id="ZUp-cQ-nIL"/>
                                             <outlet property="labelMorada" destination="LsY-kO-vPK" id="Nqd-WM-Cpd"/>
+                                            <outlet property="labelServico" destination="6wd-Cl-jWe" id="k7y-kR-ZNX"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
+                                    <outlet property="dataSource" destination="iMI-yh-WNb" id="PTR-wh-PVA"/>
                                     <outlet property="delegate" destination="iMI-yh-WNb" id="7DF-Au-H92"/>
                                 </connections>
                             </tableView>
@@ -145,6 +150,9 @@
                         <viewLayoutGuide key="safeArea" id="MHf-sf-c9S"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="XgO-Hy-QeL"/>
+                    <connections>
+                        <outlet property="tableView" destination="gmw-Qb-px7" id="FQH-wh-8os"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtN-uP-Oau" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

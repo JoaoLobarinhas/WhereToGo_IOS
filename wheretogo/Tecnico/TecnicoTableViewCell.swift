@@ -11,10 +11,12 @@ import UIKit
 class TecnicoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var labelMorada: UILabel!
-    @IBOutlet weak var lblData: UILabel!
-    @IBOutlet weak var lblServico: UILabel!
+    @IBOutlet weak var labelData: UILabel!
+    @IBOutlet weak var labelServico: UILabel!
+    @IBOutlet weak var labelEstado: UILabel!
     @IBOutlet weak var btnConcluido: UIButton!
     @IBOutlet weak var btnCancelar: UIButton!
+    @IBOutlet weak var imageEstado: UIImageView!
     
     
     override func awakeFromNib() {
