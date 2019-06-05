@@ -8,16 +8,16 @@
 
 import Foundation
 
-class Service {
-    var id: String
-    var contato: String
-    var data: String
-    var descricao: String
-    var estado: String
-    var morada: String
-    var tecnico: String
-    var tipo: String
-    var coordenadas: Coordenadas
+class Service: NSObject, Codable {
+    var id: String = ""
+    var contato: String = ""
+    var data: String = ""
+    var descricao: String = ""
+    var estado: String = ""
+    var morada: String = ""
+    var tecnico: String = ""
+    var tipo: String = ""
+    var coordenadas: Coordenadas? = nil
     
     
     init(id: String, contato: String, data: String, descricao: String, estado: String, morada: String, tecnico: String, tipo: String, coordenadas: Coordenadas) {

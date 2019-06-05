@@ -8,11 +8,11 @@
 
 import Foundation
 
-class Coordenadas {
-    var latitude: String
-    var longitude: String
+class Coordenadas: Codable {
+    var latitude: Float = 0.0
+    var longitude: Float = 0.0
     
-    init(latitude: String, longitude: String) {
+    init(latitude: Float, longitude: Float) {
         self.latitude = latitude;
         self.longitude = longitude;
     }

@@ -17,7 +17,7 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let service:Service = Service(id: "1", contato: "aaa" , data: "9999", descricao: "Cena", estado: "Pendente", morada: "Viana", tecnico: "Paulo Mendes", tipo: "Reparacao", coordenadas: Coordenadas(latitude: "1", longitude: "2") )
+        let service:Service = Service(id: "1", contato: "aaa" , data: "9999", descricao: "Cena", estado: "Pendente", morada: "Viana", tecnico: "Paulo Mendes", tipo: "Reparacao", coordenadas: Coordenadas(latitude: 1.2, longitude: 2.2) )
         
         arrayEntities.append(service)
         

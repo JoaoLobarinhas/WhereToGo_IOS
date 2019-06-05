@@ -32,11 +32,29 @@ class ViewController: UIViewController, UITextFieldDelegate {
         /*self.ref?.child("users").child("jaPbkxC9WXaIcgyFMLgGppDsc4A3")
             .setValue(["nome": "Paulo", "tipo": "Tecnico", "id": "jaPbkxC9WXaIcgyFMLgGppDsc4A3", "email": "paulo@paulo.pt"])*/
         
-        /*self.ref?.child("servico").observe(.value) { snapshot in
-            for child in snapshot.children {
-                print(child)
+        self.ref?.child("servico").observe(.childAdded, with: { (snapshot) in
+            
+            
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                /*print(dictionary["contato"] as? String)
+                print(dictionary["data"] as? String)
+                print(dictionary["descricao"] as? String)
+                print(dictionary["estado"] as? String)
+                print(dictionary["id"] as? String)
+                print(dictionary["morada"] as? String)
+                print(dictionary["tecnico"] as? String)
+                print(dictionary["tipo"] as? String)
+                var coord = dictionary["coordenadas"] as? NSObject
+                print(coord?.value(forKey: "latitude"))
+                print(coord?.value(forKey: "longitude"))*/
+                
+                print(dictionary["coordenadas"]!["latitude"])
+                
             }
-        }*/
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {

@@ -10,5 +10,6 @@ pod 'Firebase/Core'
 pod 'Firebase/Database'
 pod 'FirebaseUI/Auth'
 pod 'Firebase/Auth'
+pod 'CodableFirebase'
 
 end
