@@ -21,10 +21,12 @@ class ServicesAdminTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
     @IBOutlet weak var labelMorada: UILabel!
     @IBOutlet weak var labelData: UILabel!
     @IBOutlet weak var labelDesc: UILabel!
     @IBOutlet weak var labelEstado: UILabel!
+    
     @IBOutlet weak var imageUser: UIImageView!
     
 

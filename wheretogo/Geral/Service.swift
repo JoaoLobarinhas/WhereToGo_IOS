@@ -17,9 +17,10 @@ class Service {
     var morada: String
     var tecnico: String
     var tipo: String
+    var coordenadas: Coordenadas
     
     
-    init(id: String, contato: String, data: String, descricao: String, estado: String, morada: String, tecnico: String, tipo: String) {
+    init(id: String, contato: String, data: String, descricao: String, estado: String, morada: String, tecnico: String, tipo: String, coordenadas: Coordenadas) {
         self.id = id;
         self.contato = contato;
         self.data = data;
@@ -28,5 +29,6 @@ class Service {
         self.morada = morada;
         self.tecnico = tecnico;
         self.tipo = tipo;
+        self.coordenadas = coordenadas;
     }
 }
