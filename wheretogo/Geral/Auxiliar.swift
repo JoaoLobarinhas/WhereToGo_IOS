@@ -12,7 +12,7 @@ import Firebase
 class Auxiliar{
     
     static let shared = Auxiliar()
-    
+    private var username:String=""
     //Initializer access level change now
     private init(){}
     
@@ -22,7 +22,13 @@ class Auxiliar{
         return logout
     }
     
-   
+    func getUsername() -> String {
+        return username
+    }
+    
+    func setUsername(username:String){
+        self.username=username
+    }
     
 }
 

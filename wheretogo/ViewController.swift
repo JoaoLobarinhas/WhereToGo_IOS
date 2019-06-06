@@ -106,6 +106,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     self.loader.isHidden = true
                     let value = snapshot.value as? NSDictionary
                     let tipo = value?["tipo"] as? String ?? ""
+                    let username = value?["nome"] as? String ?? ""
+                    Auxiliar.shared.setUsername(username: username)
                     if(tipo == "Administrador"){
                         self.performSegue(withIdentifier: "Segue_Admin", sender: self.btnLogin)
                     }else{
