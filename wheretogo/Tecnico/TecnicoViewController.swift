@@ -15,17 +15,13 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var tableView: UITableView!
     
-    var ref:DatabaseReference?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ref = Database.database().reference()
 
         
-        
-        self.ref?.child("servico").queryOrdered(byChild: "tecnico").queryEqual(toValue: Auxiliar.userLoged).observe(.childAdded, with: { (snapshot) in
+        /*Database.database().reference().child("servico").queryEqual(toValue: Auxiliar.userInstance, childKey: "tecnico").observe(.value, with: { (snapshot) in
             
+            print ("Estou aqui 2")
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 
@@ -63,7 +59,7 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
             
         }) { (error) in
             print(error.localizedDescription)
-        }
+        }*/
         
         
     }

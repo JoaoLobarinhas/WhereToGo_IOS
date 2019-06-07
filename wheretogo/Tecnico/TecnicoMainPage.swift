@@ -33,9 +33,20 @@ class TecnicoMainPage: UITabBarController{
         tabBarIteam.selectedImage = selectedImageAdd
         tabBarIteam.title = "Mapa"
         
-        
         // initaial tab bar index
         self.selectedIndex = 0
+        
+        Database.database().reference().child("users").queryOrdered(byChild: "id").queryEqual(toValue: Auxiliar.userLoged).observe(.value, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                
+                Auxiliar.userInstance = User(userID: Auxiliar.userLoged, dictionary: dictionary)
+            }
+            
+        }){ (error) in
+            print(error.localizedDescription)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

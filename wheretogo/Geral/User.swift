@@ -24,4 +24,13 @@ class User: NSObject {
         profile = dictionary["profile"] as? String
         tipo = dictionary["tipo"] as? String
     }
+    
+    init(userID: String,dictionary: [String: AnyObject]) {
+        super.init()
+        email = dictionary[userID]!["email"] as? String
+        id = dictionary[userID]!["id"] as? String
+        nome = dictionary[userID]!["nome"] as? String
+        profile = dictionary[userID]!["profile"] as? String
+        tipo = dictionary[userID]!["tipo"] as? String
+    }
 }

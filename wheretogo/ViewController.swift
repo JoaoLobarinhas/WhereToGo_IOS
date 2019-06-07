@@ -26,9 +26,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var ref:DatabaseReference?
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,7 +34,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         btnLogin.applyOutlinedTheme(withScheme: containerScheme)
         btnLogin.setBorderColor(UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1), for: .normal)
         
-        ref = Database.database().reference()
         /*self.ref?.child("users").child("tDREuicczZgLyBsZ4JUeqedI19j2")
             .setValue(["nome": "Lobarinhas", "tipo": "Tecnico", "id": "tDREuicczZgLyBsZ4JUeqedI19j2", "email": "lobarinhas@pinheiro.pt"])*/
         
@@ -83,7 +79,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if error == nil && user != nil {
                 
                 let userID = Auth.auth().currentUser?.uid
-                self.ref?.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                Database.database().reference().child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     self.loader.isHidden = true
                     let value = snapshot.value as? NSDictionary

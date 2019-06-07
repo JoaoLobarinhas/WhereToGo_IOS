@@ -27,13 +27,12 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBOutlet weak var tableView: UITableView!
     
-    var ref:DatabaseReference?
-    
     func getServicos(){
         Database.database().reference().child("servico").observe(.childAdded, with: { (snapshot) in
             
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
+                print(dictionary)
                 let servico = ServiceFirebase(dictionary: dictionary)
                 self.services.append(servico)
                 
@@ -56,8 +55,6 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         
         getServicos()
-        ref = Database.database().reference()
-        
         
         Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
             
