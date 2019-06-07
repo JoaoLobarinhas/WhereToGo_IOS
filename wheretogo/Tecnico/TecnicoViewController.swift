@@ -24,7 +24,7 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
 
         
         
-        self.ref?.child("servico").queryOrdered(byChild: "tecnico").queryEqual(toValue: Auxiliar.shared.getUsername()).observe(.childAdded, with: { (snapshot) in
+        self.ref?.child("servico").queryOrdered(byChild: "tecnico").queryEqual(toValue: Auxiliar.userLoged).observe(.childAdded, with: { (snapshot) in
             
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
