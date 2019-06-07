@@ -19,6 +19,9 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     var services = [ServiceFirebase]()
     
+    var ourGrey: UIColor = UIColor.init(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
+    var ourBlue: UIColor = UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+    
     var toolBar = UIToolbar()
     var picker  = UIPickerView()
     
@@ -112,6 +115,8 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.labelDesc.text = ec.descricao;
         cell.imageUser.image = UIImage(named: "user")
         
+        print("vou imprimir as cells")
+        
         if let profileImageUrl:String = ec.tecnico?.value(forKey: "profile") as? String {
             let url = URL(string: profileImageUrl)
             let urlRequest = URLRequest(url: url!)
@@ -137,8 +142,19 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
             task.resume()
         }
         
+        if(cell.labelEstado.text == "Concluido" || cell.labelEstado.text == "Cancelado" ){
+            cell.btnRealocar.isEnabled = false
+            cell.btnCancelar.isEnabled = false
+            cell.btnCancelar.setBorderColor(ourGrey, for: .normal)
+        } else {
+            cell.btnRealocar.isEnabled = true
+            cell.btnCancelar.isEnabled = true
+            cell.btnCancelar.setBorderColor(ourBlue, for: .normal)
+        }
+        
         cell.btnRealocar.addTarget(self, action: #selector(realocar(sender:)), for: .touchUpInside)
         cell.btnRealocar.tag = indexPath.row
+        
         
         cell.btnCancelar.addTarget(self, action: #selector(cancelar(sender:)), for: .touchUpInside)
         cell.btnCancelar.tag = indexPath.row
