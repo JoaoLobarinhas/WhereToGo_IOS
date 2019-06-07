@@ -19,13 +19,15 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
 
         
-        /*Database.database().reference().child("servico").queryEqual(toValue: Auxiliar.userInstance, childKey: "tecnico").observe(.value, with: { (snapshot) in
+        Database.database().reference().child("servico").observe(.value, with: { (snapshot) in
             
-            print ("Estou aqui 2")
+            print (snapshot)
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 
-                let data:String = dictionary["data"] as! String
+                print(dictionary)
+                
+                /*let data:String = dictionary["data"] as! String
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy"
                 dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
@@ -54,12 +56,12 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
                     self.arrayServices.append(service)
                     
                     self.tableView.reloadData()
-                }
+                }*/
             }
             
         }) { (error) in
             print(error.localizedDescription)
-        }*/
+        }
         
         
     }
