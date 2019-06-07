@@ -8,80 +8,89 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import MaterialComponents.MaterialButtons
 
-class AdminViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class AdminViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    var pickerData: [String] = [String]()
+    var user = [User]()
+    var serviceClicked:Int = 0
     var arrayServices = [Service]()
+    
+    var services = [ServiceFirebase]()
+    
+    var ourGrey: UIColor = UIColor.init(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
+    var ourBlue: UIColor = UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+    
+    var toolBar = UIToolbar()
+    var picker  = UIPickerView()
     
     @IBOutlet weak var tableView: UITableView!
     
     var ref:DatabaseReference?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        ref = Database.database().reference()
-        
-        /*self.ref?.child("servico").observe(DataEventType.value, with: { (snapshot) in
+    func getServicos(){
+        Database.database().reference().child("servico").observe(.childAdded, with: { (snapshot) in
             
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
+                let servico = ServiceFirebase(dictionary: dictionary)
+                self.services.append(servico)
                 
-                let contato = dictionary["contato"] as? String;
-                let data = dictionary["data"] as? String;
-                let descricao = dictionary["descricao"] as? String;
-                let estado = dictionary["estado"] as? String;
-                let id = dictionary["id"] as? String;
-                let morada = dictionary["morada"] as? String;
-                let tecnico = dictionary["tecnico"] as? String;
-                let tipo = dictionary["tipo"] as? String;
-                let coord = dictionary["coordenadas"] as? NSObject
-                
-                print(contato)
-                print(data)
-                print(descricao)
-                print(estado)
-                print(id)
-                print(morada)
-                print(tecnico)
-                print(tipo)
-                print(coord)
-                
-                /*let service:Service = Service(id: id!, contato: contato! , data: data!, descricao: descricao!, estado: estado!, morada: morada!, tecnico: tecnico!, tipo: tipo!, coordenadas: Coordenadas(latitude: coord?.value(forKey: "latitude") as! Float, longitude: coord?.value(forKey: "longitude") as! Float) )*/
-                
-                //self.arrayServices.append(service)
-                
-                //self.tableView.reloadData()
-                
-                print("entrei")
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
             
         }) { (error) in
             print(error.localizedDescription)
-        }*/
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.tableView.allowsSelection = false;
         
-        self.ref?.child("servico").observe(.childAdded, with: { (snapshot) in
+        self.picker.delegate = self
+        self.picker.dataSource = self
+        
+        
+        getServicos()
+        ref = Database.database().reference()
+        
+        
+        Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
             
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
-                let contato:String = dictionary["contato"] as! String
-                let data:String = dictionary["data"] as! String
-                let descricao:String = dictionary["descricao"] as! String
-                let estado:String = dictionary["estado"] as! String
-                let id:String = dictionary["id"] as! String
-                let morada:String = dictionary["morada"] as! String
-                let tecnico:String = dictionary["tecnico"] as! String
-                let tipo:String = dictionary["tipo"] as! String
+                let user = User(dictionary: dictionary)
+                self.user.append(user)
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        Database.database().reference().child("servico").observe(.childChanged, with: { (snapshot) in
+            
+            
+            if let dictionary = snapshot.value as? [String: AnyObject] {
                 
-                let latitude:NSNumber = dictionary["coordenadas"]!["latitude"] as! NSNumber
-                let longitude:NSNumber = dictionary["coordenadas"]!["longitude"] as! NSNumber
+
+                let servicoUpdated = ServiceFirebase(dictionary: dictionary)
                 
-                let service:Service = Service(id: id, contato: contato , data: data, descricao: descricao, estado: estado, morada: morada, tecnico: tecnico, tipo: tipo, coordenadas: Coordenadas(latitude: latitude.floatValue, longitude: longitude.floatValue ));
                 
-                self.arrayServices.append(service)
+                for i in 0..<self.services.count {
+                    if(self.services[i].id == servicoUpdated.id){
+                        self.services[i] = servicoUpdated
+                        break
+                    }
+                }
                 
-                self.tableView.reloadData()
                 
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
             
         }) { (error) in
@@ -89,21 +98,147 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         
+        
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayServices.count
+        return services.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ServicesAdminTableViewCell
-        let ec:Service = arrayServices[indexPath.row]
+        let ec:ServiceFirebase = services[indexPath.row]
         cell.labelData.text = ec.data;
         cell.labelMorada.text = ec.morada;
         cell.labelEstado.text = ec.estado;
         cell.labelDesc.text = ec.descricao;
-        cell.imageUser.image = UIImage(named: "map_blue");
+        cell.imageUser.image = UIImage(named: "user")
+        
+        print("vou imprimir as cells")
+        
+        if let profileImageUrl:String = ec.tecnico?.value(forKey: "profile") as? String {
+            let url = URL(string: profileImageUrl)
+            let urlRequest = URLRequest(url: url!)
+            
+            // set up the session
+            let config = URLSessionConfiguration.default
+            let session = URLSession(configuration: config)
+            
+            let task = session.dataTask(with: urlRequest) {
+                (data, response, error) in
+                
+                if error != nil {
+                    print(error ?? "erro")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    cell.imageUser?.image = UIImage(data: data!)
+                }
+                
+            }
+            
+            task.resume()
+        }
+        
+        if(cell.labelEstado.text == "Concluido" || cell.labelEstado.text == "Cancelado" ){
+            cell.btnRealocar.isEnabled = false
+            cell.btnCancelar.isEnabled = false
+            cell.btnCancelar.setBorderColor(ourGrey, for: .normal)
+        } else {
+            cell.btnRealocar.isEnabled = true
+            cell.btnCancelar.isEnabled = true
+            cell.btnCancelar.setBorderColor(ourBlue, for: .normal)
+        }
+        
+        cell.btnRealocar.addTarget(self, action: #selector(realocar(sender:)), for: .touchUpInside)
+        cell.btnRealocar.tag = indexPath.row
+        
+        
+        cell.btnCancelar.addTarget(self, action: #selector(cancelar(sender:)), for: .touchUpInside)
+        cell.btnCancelar.tag = indexPath.row
+        
         return cell;
+    }
+    
+    @objc func realocar(sender: MDCButton){
+        self.pickerData.removeAll()
+        self.serviceClicked = sender.tag
+        
+        print("Tecnico" + (services[serviceClicked].tecnico?.value(forKey: "nome") as! String))
+        
+        for user in user {
+            if(user.id != services[serviceClicked].tecnico?.value(forKey: "id") as? String){
+                pickerData.append(user.nome!)
+            }
+        }
+        
+        picker = UIPickerView.init()
+        picker.delegate = self
+        picker.autoresizingMask = .flexibleWidth
+        picker.backgroundColor = UIColor.white
+        picker.setValue(UIColor.black, forKey: "textColor")
+        picker.contentMode = .center
+        picker.frame = CGRect.init(x: 0.0, y: 0.0,  width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
+        self.view.addSubview(picker)
+        
+        toolBar = UIToolbar.init(frame: CGRect.init(x: 0.0, y: 60, width: UIScreen.main.bounds.size.width, height: 50))
+        toolBar.barStyle = .default
+        toolBar.items = [UIBarButtonItem.init(title: "Done", style: .done, target: self, action: #selector(onDoneButtonTapped))]
+        self.view.addSubview(toolBar)
+    }
+    
+    @objc func cancelar(sender: MDCButton){
+        self.serviceClicked = sender.tag
+        let serviceSelected = services[serviceClicked].id
+        Database.database().reference().child("servico").child(serviceSelected!).updateChildValues(["estado": "Cancelado"])
+    }
+    
+    @objc func onDoneButtonTapped() {
+        toolBar.removeFromSuperview()
+        picker.removeFromSuperview()
+        let selected = picker.selectedRow(inComponent: 0)
+        
+        var userClicked: User!
+        
+        for u in user {
+            if(u.nome == self.pickerData[selected]){
+                userClicked = u
+                break
+            }
+        }
+        
+        let serviceSelected = services[serviceClicked].id
+        
+        let new_tecnico = [
+            "email" : userClicked.email,
+            "id": userClicked.id,
+            "nome": userClicked.nome,
+            "profile": userClicked.profile,
+            "tipo": userClicked.tipo
+        ]
+        
+        //Database.database().reference().child("servico").child(serviceSelected!).updateChildValues(["tecnico": new_tecnico])
+        Database.database().reference().child("servico").child(serviceSelected!).updateChildValues(["tecnico": new_tecnico], withCompletionBlock: {error, ref in
+            if error != nil{
+                print("ERROR")
+            }else{
+                //self.getUsers()
+            }
+        } )
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
     }
 }
 

@@ -28,6 +28,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     var ref:DatabaseReference?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,30 +41,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         /*self.ref?.child("users").child("tDREuicczZgLyBsZ4JUeqedI19j2")
             .setValue(["nome": "Lobarinhas", "tipo": "Tecnico", "id": "tDREuicczZgLyBsZ4JUeqedI19j2", "email": "lobarinhas@pinheiro.pt"])*/
         
-        self.ref?.child("servico").observe(.childAdded, with: { (snapshot) in
-            
-            
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                /*print(dictionary["contato"] as? String)
-                print(dictionary["data"] as? String)
-                print(dictionary["descricao"] as? String)
-                print(dictionary["estado"] as? String)
-                print(dictionary["id"] as? String)
-                print(dictionary["morada"] as? String)
-                print(dictionary["tecnico"] as? String)
-                print(dictionary["tipo"] as? String)
-                var coord = dictionary["coordenadas"] as? NSObject
-                print(coord?.value(forKey: "latitude"))
-                print(coord?.value(forKey: "longitude"))*/
-                
-                print(dictionary["coordenadas"]!["latitude"])
-                
-                
-            }
-            
-        }) { (error) in
-            print(error.localizedDescription)
-        }
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -93,6 +70,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let secondVC: AdminMainPage = segue.destination as! AdminMainPage
+        secondVC.userLoged = self.userLoged;
+        
+    }*/
     
     
     @IBAction func login(_ sender: Any) {
@@ -106,12 +88,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     self.loader.isHidden = true
                     let value = snapshot.value as? NSDictionary
                     let tipo = value?["tipo"] as? String ?? ""
+<<<<<<< HEAD
                     let username = value?["nome"] as? String ?? ""
                     Auxiliar.shared.setUsername(username: username)
+=======
+                    Auxiliar.userLoged = userID!
+>>>>>>> master
                     if(tipo == "Administrador"){
-                        self.performSegue(withIdentifier: "Segue_Admin", sender: self.btnLogin)
+                        self.performSegue(withIdentifier: "Segue_Admin", sender: self)
                     }else{
-                        self.performSegue(withIdentifier: "Tecnico_Segue", sender: self.btnLogin)
+                        self.performSegue(withIdentifier: "Tecnico_Segue", sender: self)
                     }
                 }) { (error) in
                     print(error.localizedDescription)

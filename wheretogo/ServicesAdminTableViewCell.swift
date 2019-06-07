@@ -25,6 +25,12 @@ class ServicesAdminTableViewCell: UITableViewCell {
         btnCancelar.applyOutlinedTheme(withScheme: containerScheme)
         btnCancelar.setBorderColor(UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1), for: .normal)
         btnCancelar.setElevation(ShadowElevation(rawValue: 1), for: .normal)
+        imageUser.translatesAutoresizingMaskIntoConstraints = false
+        imageUser.layer.cornerRadius = 31
+        imageUser.layer.masksToBounds = true
+        
+        
+        
         
     }
 
@@ -39,9 +45,10 @@ class ServicesAdminTableViewCell: UITableViewCell {
     @IBOutlet weak var labelData: UILabel!
     @IBOutlet weak var labelDesc: UILabel!
     @IBOutlet weak var labelEstado: UILabel!
-    
-    
     @IBOutlet weak var imageUser: UIImageView!
+    
+    
+    
     
     
     
