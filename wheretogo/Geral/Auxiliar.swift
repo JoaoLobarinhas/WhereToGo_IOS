@@ -14,8 +14,6 @@ class Auxiliar{
     static let shared = Auxiliar()
 
     static var userLoged:String = ""
-    static var userInstance:User?
-    static var ref:DatabaseReference?
     
     //Initializer access level change now
     private init(){}

@@ -13,66 +13,56 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
     
     var arrayServices = [Service]()
     
+    var services = [ServiceFirebase]()
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        getServicesFirebase()
         
-        Database.database().reference().child("servico").observe(.value, with: { (snapshot) in
-            
-            print (snapshot)
+    }
+    
+    func getServicesFirebase(){
+        
+        let dates = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: dates)
+        let dateF = String(components.day!)+"-"+String(components.month!)+"-"+String(components.year!)
+        
+        Database.database().reference().child("servico").queryOrdered(byChild: "data").queryEqual(toValue: dateF).observe(.childAdded, with: { (snapshot) in
+
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 
-                print(dictionary)
+                print(dictionary["tecnico"]?["id"] as! String)
+                let servico = ServiceFirebase(dictionary: dictionary)
                 
-                /*let data:String = dictionary["data"] as! String
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd-MM-yyyy"
-                dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
-                let dataAux = dateFormatter.date(from:data)!
-                let date = Date()
-                print(dataAux)
-                print(date)
-                
-                if dataAux >= date {
-                    let contato:String = dictionary["contato"] as! String
+               if dictionary["tecnico"]?["id"] as! String == Auxiliar.userLoged{
+                    print("Estou aqui")
+                    self.services.append(servico)
                     
-                    let descricao:String = dictionary["descricao"] as! String
-                    let estado:String = dictionary["estado"] as! String
-                    let id:String = dictionary["id"] as! String
-                    let morada:String = dictionary["morada"] as! String
-                    let tecnico:String = dictionary["tecnico"] as! String
-                    let tipo:String = dictionary["tipo"] as! String
-                    
-                    let latitude:NSNumber = dictionary["coordenadas"]!["latitude"] as! NSNumber
-                    let longitude:NSNumber = dictionary["coordenadas"]!["longitude"] as! NSNumber
-                    
-                    print(dictionary)
-                    
-                    let service:Service = Service(id: id, contato: contato , data: data, descricao: descricao, estado: estado, morada: morada, tecnico: tecnico, tipo: tipo, coordenadas: Coordenadas(latitude: latitude.floatValue, longitude: longitude.floatValue ));
-                    
-                    self.arrayServices.append(service)
-                    
-                    self.tableView.reloadData()
-                }*/
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+
+                }
             }
             
         }) { (error) in
             print(error.localizedDescription)
         }
         
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayServices.count
+        return services.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TecnicoTableViewCell
-        let ec:Service = arrayServices[indexPath.row]
+        let ec:ServiceFirebase = services[indexPath.row]
         cell.labelData.text = ec.data;
         cell.labelMorada.text = ec.morada;
         cell.labelEstado.text = ec.estado;
