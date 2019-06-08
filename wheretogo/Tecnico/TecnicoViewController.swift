@@ -15,21 +15,23 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
     
     var services = [ServiceFirebase]()
     
+    var dateF:String?
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        getServicesFirebase()
-        
-    }
-    
-    func getServicesFirebase(){
         
         let dates = Date()
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: dates)
-        let dateF = String(components.day!)+"-"+String(components.month!)+"-"+String(components.year!)
+        dateF = String(components.day!)+"-"+String(components.month!)+"-"+String(components.year!)
+        
+        getServicesFirebase()
+        updateServicos()
+    }
+    
+    func getServicesFirebase(){
         
         Database.database().reference().child("servico").queryOrdered(byChild: "data").queryEqual(toValue: dateF).observe(.childAdded, with: { (snapshot) in
 
@@ -37,10 +39,10 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 
                 print(dictionary["tecnico"]?["id"] as! String)
-                let servico = ServiceFirebase(dictionary: dictionary)
                 
-               if dictionary["tecnico"]?["id"] as! String == Auxiliar.userLoged{
-                    print("Estou aqui")
+                if dictionary["tecnico"]?["id"] as! String == Auxiliar.userLoged{
+                
+                    let servico = ServiceFirebase(dictionary: dictionary)
                     self.services.append(servico)
                     
                     DispatchQueue.main.async {
@@ -55,6 +57,42 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
         }
         
     }
+    
+    func updateServicos(){
+        Database.database().reference().child("servico").queryOrdered(byChild: "data").observe(.childChanged, with: { (snapshot)
+            in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                
+                print(dictionary)
+                
+                if dictionary["tecnico"]?["id"] as! String == Auxiliar.userLoged{
+                    
+                    let servicoUpdated = ServiceFirebase(dictionary: dictionary)
+                    
+                    for i in 0..<self.services.count{
+                        if self.services[i].id == servicoUpdated.id{
+                            if servicoUpdated.data as! String == self.dateF as! String{
+                                self.services[i] = servicoUpdated
+                                break
+                            }
+                            else{
+                                self.services.remove(at: i)
+                                break
+                            }
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                    
+                }
+                
+            }
+        })
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return services.count
