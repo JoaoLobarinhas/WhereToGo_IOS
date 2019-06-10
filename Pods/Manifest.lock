@@ -47,6 +47,13 @@ PODS:
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 0.3)
+  - GoogleMaps (3.1.0):
+    - GoogleMaps/Maps (= 3.1.0)
+  - GoogleMaps/Base (3.1.0)
+  - GoogleMaps/Maps (3.1.0):
+    - GoogleMaps/Base
+  - GooglePlaces (3.1.0):
+    - GoogleMaps/Base (= 3.1.0)
   - GoogleUtilities/AppDelegateSwizzler (6.1.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -137,6 +144,8 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - FirebaseUI/Auth
+  - GoogleMaps
+  - GooglePlaces
   - MaterialComponents/Buttons
   - "MaterialComponents/Buttons+Theming"
 
@@ -152,6 +161,8 @@ SPEC REPOS:
     - FirebaseInstanceID
     - FirebaseUI
     - GoogleAppMeasurement
+    - GoogleMaps
+    - GooglePlaces
     - GoogleUtilities
     - GTMSessionFetcher
     - leveldb-library
@@ -171,6 +182,8 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 27bed93a59b6685f5c3e0c028a878a764fd75c33
   FirebaseUI: aa1ffe07fad45c2e2271a8bfa429549ad260e77d
   GoogleAppMeasurement: 51d8d9ea48f0ca44484d29cfbdef976fbd4fc336
+  GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
+  GooglePlaces: e874db179f2675c4f3eeda0b686b540273a578b0
   GoogleUtilities: 84df567c76ca84f67b7bb40e769fdd4acc746a10
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
@@ -179,6 +192,6 @@ SPEC CHECKSUMS:
   MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
 
-PODFILE CHECKSUM: 7e6053e73f93d63dce45bb54fbe0a507ce1a5fb0
+PODFILE CHECKSUM: 8275d4c25d2f1033aed0f828af418aa8294ab6d2
 
 COCOAPODS: 1.6.2
