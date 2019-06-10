@@ -17,27 +17,10 @@
                     <view key="view" contentMode="scaleToFill" id="TN4-gD-hcN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3BD-lW-OJT">
-                                <rect key="frame" x="5" y="25" width="365" height="588"/>
-                                <connections>
-                                    <outlet property="delegate" destination="h8Z-L6-gYF" id="jur-59-geK"/>
-                                </connections>
-                            </mapView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="i8s-F2-eV7" firstAttribute="bottom" secondItem="3BD-lW-OJT" secondAttribute="bottom" constant="5" id="84f-cR-AUa"/>
-                            <constraint firstItem="3BD-lW-OJT" firstAttribute="top" secondItem="i8s-F2-eV7" secondAttribute="top" constant="5" id="HLc-87-CBI"/>
-                            <constraint firstItem="i8s-F2-eV7" firstAttribute="trailing" secondItem="3BD-lW-OJT" secondAttribute="trailing" constant="5" id="bZg-LB-waQ"/>
-                            <constraint firstItem="3BD-lW-OJT" firstAttribute="leading" secondItem="i8s-F2-eV7" secondAttribute="leading" constant="5" id="fBk-uk-Emz"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="i8s-F2-eV7"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="HDf-6c-UXo"/>
-                    <connections>
-                        <outlet property="mapView" destination="3BD-lW-OJT" id="NBJ-HE-r7p"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OyP-c8-j1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

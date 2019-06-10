@@ -8,34 +8,54 @@
 
 import UIKit
 import MapKit
+import GoogleMaps
 
 class MapViewController: UIViewController {
 
     
-    @IBOutlet weak var mapView: MKMapView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let initialLocation = CLLocation(latitude: 41.701497, longitude: -8.834756)
+        let camera = GMSCameraPosition.camera(withLatitude: 41.701497, longitude: -8.834756, zoom: 12.0)
+        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         
-        self.centerMap(location: initialLocation)
+        view = mapView
         
-        drawRoute()
-
+        
+        let path = GMSMutablePath()
+        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.0))
+        path.add(CLLocationCoordinate2D(latitude: 37.45, longitude: -122.0))
+        path.add(CLLocationCoordinate2D(latitude: 37.45, longitude: -122.2))
+        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.2))
+        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.0))
+        
+        let rectangle = GMSPolyline(path: path)
+        rectangle.map = mapView
+        
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude:41.701497 , longitude: -8.834756))
+        marker.title = "TESTE"
+        marker.map = mapView
+        
+        
+        drawRoute(map: mapView)
         // Do any additional setup after loading the view.
     }
     
     func centerMap(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 1500, 1500)
-        mapView.setRegion(coordinateRegion,animated: true)
+        //let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 1500, 1500)
+        //mapView.setRegion(coordinateRegion,animated: true)
     }
     
-    func drawRoute(){
-        let origin = "\(41.700122),\(-8.846185)"
-        let destination = "\(41.693048),\(-8.843095)"
+    func drawRoute(map : GMSMapView){
+        let origin = "\(41.697607),\(-8.849940)"
+        let destination = "\(41.695732),\(-8.849264)"
         let urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=AIzaSyAOEfIHh-VYr8V73LmBo_ubiQrOeMdgPaE"
-        let url = URL(string: urlString)
+        
+        var newUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=41.697131,-8.835841&destination=41.697412,-8.841945&waypoints=optimize:true|41.693257,-8.846853|41.690134,-8.830279|41.694667,-8.833592|41.695114,-8.820588|41.701545,-8.835176&key=AIzaSyAOEfIHh-VYr8V73LmBo_ubiQrOeMdgPaE"
+        
+        
+        let url = URL(string: newUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
@@ -52,31 +72,24 @@ class MapViewController: UIViewController {
                     if let arrayRoutes = dictionaryMain["routes"] as? [Any] {
                         
                         if let routeDictionary = arrayRoutes[0] as? [String: AnyObject] {
-                            let points = routeDictionary["overview_polyline"]!["points"]
-                            let path = GMSPath.init(fromEncodedPath: points!)
+                            let points = routeDictionary["overview_polyline"]!["points"] as? String
                             
-                            let polyline = GMSPolyline(path: path)
-                            polyline.strokeColor = .black
-                            polyline.strokeWidth = 10.0
-                            polyline.map = self.mapView
+                            DispatchQueue.main.async {
+                               
+                                let path = GMSPath.init(fromEncodedPath: points!)
+                                
+                                let polyline = GMSPolyline(path: path)
+                                polyline.strokeColor = .red
+                                polyline.strokeWidth = 10.0
+                                polyline.map = map
+                            }
+                            
                         }
                         
                     }
                     
                     
                 }
-                /*for route in routes
-                {
-                    let routeOverviewPolyline = route["overview_polyline"].dictionary
-                    let points = routeOverviewPolyline?["points"]?.stringValue
-                    let path = GMSPath.init(fromEncodedPath: points!)
-                    
-                    let polyline = GMSPolyline(path: path)
-                    polyline.strokeColor = .black
-                    polyline.strokeWidth = 10.0
-                    polyline.map = mapViewX
-                    
-                }*/
             }catch let parsingError {
                 print("ERRO")
                 print(parsingError)
