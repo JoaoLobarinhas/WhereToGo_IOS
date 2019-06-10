@@ -22,6 +22,9 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
     let date = Date()
     var formatter = DateFormatter()
     
+    var ourGrey: UIColor = UIColor.init(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
+    var ourBlue: UIColor = UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -53,7 +56,7 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
                 
                     let servico = ServiceFirebase(dictionary: dictionary)
                     
-                    if(dictionary["estado"] as! String == "Pendente" || dictionary["estado"] as! String == "Aceite"){
+                    if(dictionary["estado"] as! String == "Pendente" || dictionary["estado"] as! String == "Pendente_por_aceitar" || dictionary["estado"] as! String == "Concluido"){
                         self.services.append(servico)
                     }
                     
@@ -84,7 +87,7 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
                     
                     for i in 0..<self.services.count{
                         if self.services[i].id == servicoUpdated.id{
-                            if(servicoUpdated.estado! as! String == "Pendente" || servicoUpdated.estado! as! String == "Aceite"){
+                            if(servicoUpdated.estado! as! String == "Pendente" || servicoUpdated.estado! as! String == "Pendente_por_aceitar" || servicoUpdated.estado! as! String == "Concluido"){
                                 self.services[i] = servicoUpdated
                                 break
                             }
@@ -115,11 +118,18 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
         let ec:ServiceFirebase = services[indexPath.row]
         cell.labelData.text = ec.data;
         cell.labelMorada.text = ec.morada;
-        cell.labelEstado.text = ec.estado;
-        cell.labelServico.text = ec.descricao;
-        cell.imageEstado.image = UIImage(named: "map_blue");
         
-        if cell.labelEstado.text == "Pendente"{
+        if(ec.estado == "Pendente_por_aceitar"){
+            cell.labelEstado.text = "Por aceitar";
+        }else{
+            cell.labelEstado.text = ec.estado
+        }
+        
+        cell.labelServico.text = ec.descricao;
+        
+        //cell.btnConcluido.setBorderColor(ourBlue, for: .normal)
+        
+        if cell.labelEstado.text == "Por aceitar"{
             
             cell.btnConcluido.setTitle("Aceitar", for: .normal)
             cell.btnConcluido.addTarget(self, action: #selector(aceitarSerivco(sender:)), for: .touchUpInside)
@@ -129,8 +139,10 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
             cell.btnCancelar.addTarget(self, action: #selector(recusarServico(sender:)), for: .touchUpInside)
             cell.btnCancelar.tag = indexPath.row
             
+            cell.imageEstado.image = UIImage(named: "pending_not_accept");
+            
         }
-        else if cell.labelEstado.text == "Aceite"{
+        else if cell.labelEstado.text == "Pendente"{
             
             cell.btnConcluido.setTitle("Concluir", for: .normal)
             cell.btnConcluido.addTarget(self, action: #selector(concluirServico(sender:)), for: .touchUpInside)
@@ -140,6 +152,15 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
             cell.btnCancelar.addTarget(self, action: #selector(cancelarServico(sender:)), for: .touchUpInside)
             cell.btnCancelar.tag = indexPath.row
             
+            cell.imageEstado.image = UIImage(named: "pending_accept");
+            
+        }
+        else if cell.labelEstado.text == "Concluido"{
+            cell.btnConcluido.isEnabled = false
+            cell.btnCancelar.isEnabled = false
+            
+            cell.imageEstado.image = UIImage(named: "accept");
+            cell.btnCancelar.setBorderColor(ourGrey, for: .normal)
         }
         
         return cell;
@@ -151,7 +172,7 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
         let alert = UIAlertController(title: "Confirmação", message: "Quer mesmo recusar o serivco?", preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "Sim", style: UIAlertActionStyle.default, handler: {
             (_)in
-            Database.database().reference().child("servico").child(serviceCanceled!).updateChildValues(["estado":"Recusado"])
+            Database.database().reference().child("servico").child(serviceCanceled!).updateChildValues(["estado":"Rejeitado"])
         })
         alert.addAction(OKAction)
         alert.addAction(UIAlertAction(title: "Não", style: .cancel, handler: nil))
@@ -162,7 +183,7 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
     @objc func aceitarSerivco(sender: MDCButton){
         let serviceAccepted = services[sender.tag].id
         
-        Database.database().reference().child("servico").child(serviceAccepted!).updateChildValues(["estado":"Aceite"])
+        Database.database().reference().child("servico").child(serviceAccepted!).updateChildValues(["estado":"Pendente"])
     }
     
     @objc func cancelarServico(sender: MDCButton){

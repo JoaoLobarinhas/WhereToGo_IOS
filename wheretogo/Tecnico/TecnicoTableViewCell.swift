@@ -31,6 +31,8 @@ class TecnicoTableViewCell: UITableViewCell {
         btnCancelar.applyOutlinedTheme(withScheme: containerScheme)
         btnCancelar.setBorderColor(UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1), for: .normal)
         
+        btnConcluido.isUppercaseTitle = false
+        btnCancelar.isUppercaseTitle = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
