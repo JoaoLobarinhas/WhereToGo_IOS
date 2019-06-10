@@ -13,5 +13,6 @@ pod 'Firebase/Auth'
 pod 'CodableFirebase'
 pod 'MaterialComponents/Buttons'
 pod 'MaterialComponents/Buttons+Theming'
-
+pod 'GoogleMaps'
+pod 'GooglePlaces'
 end

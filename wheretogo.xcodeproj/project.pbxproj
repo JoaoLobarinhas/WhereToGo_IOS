@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		570D0F7822AEB5EB009B8826 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570D0F7722AEB5EB009B8826 /* MapViewController.swift */; };
 		70A12A9822A7FA3900C92097 /* Coordenadas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A12A9722A7FA3900C92097 /* Coordenadas.swift */; };
 		70B23E7A22A9AB960046C4BC /* ServiceFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B23E7922A9AB960046C4BC /* ServiceFirebase.swift */; };
 		70B23E7C22A9B1140046C4BC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B23E7B22A9B1140046C4BC /* User.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		4FEA818CE94A03D313B21BAE /* Pods-wheretogo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wheretogo.debug.xcconfig"; path = "Target Support Files/Pods-wheretogo/Pods-wheretogo.debug.xcconfig"; sourceTree = "<group>"; };
+		570D0F7722AEB5EB009B8826 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		70A12A9722A7FA3900C92097 /* Coordenadas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordenadas.swift; sourceTree = "<group>"; };
 		70B23E7922A9AB960046C4BC /* ServiceFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFirebase.swift; sourceTree = "<group>"; };
 		70B23E7B22A9B1140046C4BC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				70D497BB229F2E4F00FD8AD6 /* AdminViewController.swift */,
 				70D497C3229F4E2A00FD8AD6 /* AdminMainPage.swift */,
 				70CCBEDA22A7346C00491331 /* ServicesAdminTableViewCell.swift */,
+				570D0F7722AEB5EB009B8826 /* MapViewController.swift */,
 			);
 			name = Admin;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				70A12A9822A7FA3900C92097 /* Coordenadas.swift in Sources */,
 				70CCBEDB22A7346C00491331 /* ServicesAdminTableViewCell.swift in Sources */,
 				F6DB2C6122A6873D00DFF340 /* TecnicoMainPage.swift in Sources */,
+				570D0F7822AEB5EB009B8826 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
