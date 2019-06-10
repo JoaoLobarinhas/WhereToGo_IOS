@@ -19,6 +19,9 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
     
     var serviceClicker:Int = 0
     
+    let date = Date()
+    var formatter = DateFormatter()
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -29,13 +32,19 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
         let components = calendar.dateComponents([.year, .month, .day], from: dates)
         dateF = String(components.day!)+"-"+String(components.month!)+"-"+String(components.year!)
         
-        getServicesFirebase()
-        updateServicos()
+        formatter.dateFormat = "dd-MM-yyyy"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        let todayString = self.formatter.string(from: date)
+        
+        getServicesFirebase(todayDate: todayString)
+        updateServicos(todayDate: todayString)
     }
     
-    func getServicesFirebase(){
+    func getServicesFirebase(todayDate : String){
         
-        Database.database().reference().child("servico").queryOrdered(byChild: "data").queryEqual(toValue: dateF).observe(.childAdded, with: { (snapshot) in
+        Database.database().reference().child("servico").queryOrdered(byChild: "data").queryEqual(toValue: todayDate).observe(.childAdded, with: { (snapshot) in
 
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
@@ -61,11 +70,13 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
         
     }
     
-    func updateServicos(){
-        Database.database().reference().child("servico").queryOrdered(byChild: "data").observe(.childChanged, with: { (snapshot)
+    func updateServicos(todayDate : String){
+        Database.database().reference().child("servico").queryOrdered(byChild: "data").queryEqual(toValue: todayDate).observe(.childChanged, with: { (snapshot)
             in
             
             if let dictionary = snapshot.value as? [String: AnyObject]{
+                
+                print(dictionary)
                 
                 if dictionary["tecnico"]?["id"] as! String == Auxiliar.userLoged{
                     
@@ -73,20 +84,9 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
                     
                     for i in 0..<self.services.count{
                         if self.services[i].id == servicoUpdated.id{
-                            
-                            if servicoUpdated.data as! String == self.dateF as! String{
-                                
-                                print("Estado update: "+servicoUpdated.estado! as! String)
-                                
-                                if(servicoUpdated.estado! as! String == "Pendente" || servicoUpdated.estado! as! String == "Aceite"){
-                                    
-                                    self.services[i] = servicoUpdated
-                                    break
-                                }
-                                else{
-                                    self.services.remove(at: i)
-                                    break
-                                }
+                            if(servicoUpdated.estado! as! String == "Pendente" || servicoUpdated.estado! as! String == "Aceite"){
+                                self.services[i] = servicoUpdated
+                                break
                             }
                             else{
                                 self.services.remove(at: i)

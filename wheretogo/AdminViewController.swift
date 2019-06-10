@@ -25,16 +25,27 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
     var toolBar = UIToolbar()
     var picker  = UIPickerView()
     
+    let date = Date()
+    var formatter = DateFormatter()
+    
+    
+    
     @IBOutlet weak var tableView: UITableView!
     
-    func getServicos(){
-        Database.database().reference().child("servico").observe(.childAdded, with: { (snapshot) in
+    func getServicos(todayDate : String){
+        Database.database().reference().child("servico").queryOrdered(byChild: "data").queryEqual(toValue: todayDate).observe(.childAdded, with: { (snapshot) in
             
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
-                print(dictionary)
                 let servico = ServiceFirebase(dictionary: dictionary)
+                
+                
+                let dateString = servico.data;
+                let date = self.formatter.date(from: dateString!);
+                
                 self.services.append(servico)
+                
+            
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -53,8 +64,13 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.picker.delegate = self
         self.picker.dataSource = self
         
+        formatter.dateFormat = "dd-MM-yyyy"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
         
-        getServicos()
+        let todayString = self.formatter.string(from: date)
+        
+        getServicos(todayDate: todayString)
         
         Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
             
@@ -112,7 +128,6 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.labelDesc.text = ec.descricao;
         cell.imageUser.image = UIImage(named: "user")
         
-        print("vou imprimir as cells")
         
         if let profileImageUrl:String = ec.tecnico?.value(forKey: "profile") as? String {
             let url = URL(string: profileImageUrl)
@@ -163,7 +178,6 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.pickerData.removeAll()
         self.serviceClicked = sender.tag
         
-        print("Tecnico" + (services[serviceClicked].tecnico?.value(forKey: "nome") as! String))
         
         for user in user {
             if(user.id != services[serviceClicked].tecnico?.value(forKey: "id") as? String){
