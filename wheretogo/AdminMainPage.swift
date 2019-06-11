@@ -61,11 +61,17 @@ class AdminMainPage: UITabBarController {
         
         print("IMAGEM")
         print(Auxiliar.userProfile)
-        let imageView = UIImageView(image:UIImage(named: "cancel"))
+        let imageView = UIImageView(image:UIImage(named: "user"))
         imageView.layer.cornerRadius = 15
         imageView.layer.masksToBounds = true
         imageView.loadImageUsingCacheWithUrlString(urlString: Auxiliar.userProfile)
         self.navigationItem.titleView = imageView
+        
+        
+        NSLayoutConstraint.activate([
+            (self.navigationItem.titleView?.widthAnchor.constraint(equalToConstant: CGFloat(30)))!,
+            (self.navigationItem.titleView?.heightAnchor.constraint(equalToConstant: CGFloat(30)))!
+        ])
     }
     
     @IBAction func logOut() {

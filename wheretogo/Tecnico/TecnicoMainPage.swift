@@ -40,34 +40,23 @@ class TecnicoMainPage: UITabBarController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getUrlImage()
         self.navigationItem.setHidesBackButton(true, animated: true)
         let btnLogOut = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(TecnicoMainPage.logOut))
         self.navigationItem.rightBarButtonItem = btnLogOut
-        getUrlImage()
+        
+        let imageView = UIImageView(image:UIImage(named: "user"))
+        imageView.layer.cornerRadius = 15
+        imageView.layer.masksToBounds = true
+        imageView.loadImageUsingCacheWithUrlString(urlString: Auxiliar.userProfile)
+        self.navigationItem.titleView = imageView
+        
+        
+        NSLayoutConstraint.activate([
+            (self.navigationItem.titleView?.widthAnchor.constraint(equalToConstant: CGFloat(30)))!,
+            (self.navigationItem.titleView?.heightAnchor.constraint(equalToConstant: CGFloat(30)))!
+        ])
     }
     
-    func getUrlImage(){
-        
-        Database.database().reference().child("users").queryOrdered(byChild: "id").queryEqual(toValue: Auxiliar.userLoged).observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                
-                let urlImage = dictionary["profile"] as! String
-                let image = UIImage(named: "user")
-                let imageView = UIImageView(image: image)
-                imageView.layer.cornerRadius = 15
-                imageView.layer.masksToBounds = true
-                imageView.loadImageUsingCacheWithUrlString(urlString: urlImage)
-                self.navigationItem.titleView = imageView
-            }
-            
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-        
-        
-    }
     
     @IBAction func logOut() {
         let alert = UIAlertController(title: "Confirmação", message: "Quer mesmo terminar a sua sessão?", preferredStyle: .alert)
