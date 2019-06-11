@@ -130,28 +130,7 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         
         if let profileImageUrl:String = ec.tecnico?.value(forKey: "profile") as? String {
-            let url = URL(string: profileImageUrl)
-            let urlRequest = URLRequest(url: url!)
-            
-            // set up the session
-            let config = URLSessionConfiguration.default
-            let session = URLSession(configuration: config)
-            
-            let task = session.dataTask(with: urlRequest) {
-                (data, response, error) in
-                
-                if error != nil {
-                    print(error ?? "erro")
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    cell.imageUser?.image = UIImage(data: data!)
-                }
-                
-            }
-            
-            task.resume()
+            cell.imageUser.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
         }
         
         if(cell.labelEstado.text == "Concluido" || cell.labelEstado.text == "Cancelado" ){
