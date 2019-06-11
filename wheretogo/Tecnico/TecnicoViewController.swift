@@ -96,6 +96,9 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
                                 break
                             }
                         }
+                        else if servicoUpdated.estado! as! String == "Pendente" || servicoUpdated.estado! as! String == "Pendente_por_aceitar" || servicoUpdated.estado! as! String == "Concluido"{
+                            self.services.append(servicoUpdated)
+                        }
                     }
                     
                     DispatchQueue.main.async {
