@@ -19,7 +19,7 @@ class TecnicoMapaViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let camera = GMSCameraPosition.camera(withLatitude: 41.701497, longitude: -8.834756, zoom: 12.0)
+        let camera = GMSCameraPosition.camera(withLatitude: (Auxiliar.userLat.toDouble())!, longitude: (Auxiliar.userLng.toDouble())!, zoom: 12.0)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         
         view = mapView
@@ -34,31 +34,15 @@ class TecnicoMapaViewController: UIViewController{
         let rectangle = GMSPolyline(path: path)
         rectangle.map = mapView
         
-        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude:41.701497 , longitude: -8.834756))
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude:(Auxiliar.userLat.toDouble())!, longitude: (Auxiliar.userLng.toDouble())!))
         marker.title = "TESTE"
         marker.map = mapView
+        
     }
     
     func centerMap(location: CLLocation) {
         //let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 1500, 1500)
         //mapView.setRegion(coordinateRegion,animated: true)
-    }
-    
-    func getCoordUser(){
-        Database.database().reference().child("users").queryOrdered(byChild: "id").queryEqual(toValue: Auxiliar.userLoged).observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                
-                print(dictionary)
-                
-                self.latUser = dictionary["coordenadas"]!["latitude"] as! String
-                self.lngUser = dictionary["coordenadas"]!["longitude"] as! String
-                
-            }
-            
-        }) { (error) in
-            print(error.localizedDescription)
-        }
     }
     
     func drawRoute(map : GMSMapView){
@@ -122,4 +106,17 @@ class TecnicoMapaViewController: UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
+}
+
+extension String
+{
+    /// EZSE: Converts String to Double
+    public func toDouble() -> Double?
+    {
+        if let num = NumberFormatter().number(from: self) {
+            return num.doubleValue
+        } else {
+            return nil
+        }
+    }
 }

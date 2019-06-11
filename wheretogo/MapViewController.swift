@@ -19,12 +19,15 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     let date = Date()
     var formatter = DateFormatter()
+    var map_view = GMSMapView()
     
     var pickerData: [String] = [String]()
     var toolBar = UIToolbar()
     var picker  = UIPickerView()
     
     var mapUsers = Dictionary<String, Array<ServiceFirebase>>()
+    var services: Array<ServiceFirebase> = Array<ServiceFirebase>()
+    var coordenadas:String? = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,8 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         
         view = mapView
+        
+        self.map_view = mapView
         
         formatter.dateFormat = "dd-MM-yyyy"
         formatter.locale = Locale(identifier: "en_US_POSIX")
@@ -74,19 +79,40 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             self.pickerData.append(key)
         }
         
-        picker = UIPickerView.init()
-        picker.delegate = self
-        picker.autoresizingMask = .flexibleWidth
-        picker.backgroundColor = UIColor.white
-        picker.setValue(UIColor.black, forKey: "textColor")
-        picker.contentMode = .center
-        picker.frame = CGRect.init(x: 0.0, y: 0.0,  width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
-        self.view.addSubview(picker)
+        let vc = UIViewController()
+        vc.preferredContentSize = CGSize(width: 250,height: 300)
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        vc.view.addSubview(pickerView)
+        let editRadiusAlert = UIAlertController(title: "Escolha o técnico", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        editRadiusAlert.setValue(vc, forKey: "contentViewController")
         
-        toolBar = UIToolbar.init(frame: CGRect.init(x: 0.0, y: 60, width: UIScreen.main.bounds.size.width, height: 50))
-        toolBar.barStyle = .default
-        toolBar.items = [UIBarButtonItem.init(title: "Done", style: .done, target: self, action: #selector(onDoneButtonTapped))]
-        self.view.addSubview(toolBar)
+        let OKAction = UIAlertAction(title: "Confirmar", style: UIAlertActionStyle.default, handler: {
+            (_)in
+            let selected = pickerView.selectedRow(inComponent: 0)
+            let user = self.pickerData[selected]
+        
+            self.services = self.mapUsers[user]!
+            var coordenadasString = ""
+            for s in self.services {
+                var latitude = s.coordenadas?.value(forKey: "latitude") as? NSNumber
+                var longitude = s.coordenadas?.value(forKey: "longitude") as? NSNumber
+                coordenadasString += (latitude?.stringValue)!
+                coordenadasString += ","
+                coordenadasString += (longitude?.stringValue)!
+                coordenadasString += "|"
+            }
+            
+            self.coordenadas = coordenadasString
+            
+            self.drawRoute()
+            
+        })
+        
+        editRadiusAlert.addAction(OKAction)
+        editRadiusAlert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        self.present(editRadiusAlert, animated: true)
     }
     
     func getAllServices(todayDate : String){
@@ -114,14 +140,15 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     }
     
 
-    func drawRoute(map : GMSMapView){
+    func drawRoute(){
         let origin = "\(41.697607),\(-8.849940)"
         let destination = "\(41.695732),\(-8.849264)"
-        let urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=AIzaSyAOEfIHh-VYr8V73LmBo_ubiQrOeMdgPaE"
         
-        var newUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=41.697131,-8.835841&destination=41.697412,-8.841945&waypoints=optimize:true|41.693257,-8.846853|41.690134,-8.830279|41.694667,-8.833592|41.695114,-8.820588|41.701545,-8.835176&key=AIzaSyAOEfIHh-VYr8V73LmBo_ubiQrOeMdgPaE"
+        var newUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=41.697131,-8.835841&destination=41.697412,-8.841945&waypoints=optimize:true|"
+            + self.coordenadas! +
+        "&key=AIzaSyAOEfIHh-VYr8V73LmBo_ubiQrOeMdgPaE"
         
-        
+        self.map_view.clear()
         let url = URL(string: newUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
 
         
@@ -147,9 +174,9 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                                 let path = GMSPath.init(fromEncodedPath: points!)
                                 
                                 let polyline = GMSPolyline(path: path)
-                                polyline.strokeColor = .red
-                                polyline.strokeWidth = 10.0
-                                polyline.map = map
+                                polyline.strokeColor = UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+                                polyline.strokeWidth = 5.0
+                                polyline.map = self.map_view
                             }
                             
                         }
@@ -163,14 +190,6 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                 print(parsingError)
             }
         }.resume()
-    }
-    
-    
-    @objc func onDoneButtonTapped() {
-        toolBar.removeFromSuperview()
-        picker.removeFromSuperview()
-        let selected = picker.selectedRow(inComponent: 0)
-        print(selected)
     }
     
     

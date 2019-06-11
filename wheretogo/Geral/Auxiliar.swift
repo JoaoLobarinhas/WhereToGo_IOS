@@ -15,6 +15,8 @@ class Auxiliar{
 
     static var userLoged:String = ""
     static var userProfile:String = ""
+    static var userLat:String = ""
+    static var userLng = ""
     
     //Initializer access level change now
     private init(){}
