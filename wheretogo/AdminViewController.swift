@@ -70,6 +70,9 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         let todayString = self.formatter.string(from: date)
         
+        
+        
+        
         getServicos(todayDate: todayString)
         
         Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
@@ -206,8 +209,11 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
             "id": userClicked.id,
             "nome": userClicked.nome,
             "profile": userClicked.profile,
-            "tipo": userClicked.tipo
-        ]
+            "tipo": userClicked.tipo,
+            "coordenadas": userClicked.coordenadas as Any
+            ] as [String : Any]
+        
+        print(userClicked.coordenadas)
         
         //Database.database().reference().child("servico").child(serviceSelected!).updateChildValues(["tecnico": new_tecnico])
         Database.database().reference().child("servico").child(serviceSelected!).updateChildValues(["tecnico": new_tecnico], withCompletionBlock: {error, ref in

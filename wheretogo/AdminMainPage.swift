@@ -33,6 +33,8 @@ class AdminMainPage: UITabBarController {
         tabBarIteam.selectedImage = selectedImageAdd
         tabBarIteam.title = "Mapa"
         
+        
+        
         /*let selectedImageAdds = UIImage(named: "logout_blue")?.withRenderingMode(.alwaysOriginal)
         let DeSelectedImageAdds = UIImage(named: "logout_grey")?.withRenderingMode(.alwaysOriginal)
         tabBarIteam = (self.tabBar.items?[2])!
@@ -56,6 +58,14 @@ class AdminMainPage: UITabBarController {
         self.navigationItem.setHidesBackButton(true, animated: true)
         let btnLogOut = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(AdminMainPage.logOut))
         self.navigationItem.rightBarButtonItem = btnLogOut
+        
+        print("IMAGEM")
+        print(Auxiliar.userProfile)
+        let imageView = UIImageView(image:UIImage(named: "cancel"))
+        imageView.layer.cornerRadius = 15
+        imageView.layer.masksToBounds = true
+        imageView.loadImageUsingCacheWithUrlString(urlString: Auxiliar.userProfile)
+        self.navigationItem.titleView = imageView
     }
     
     @IBAction func logOut() {

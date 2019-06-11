@@ -28,6 +28,8 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.picker.delegate = self
+        self.picker.dataSource = self
         
         let camera = GMSCameraPosition.camera(withLatitude: 41.701497, longitude: -8.834756, zoom: 12.0)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
@@ -61,10 +63,16 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         button.applyContainedTheme(withScheme: containerScheme)
         button.addTarget(self, action: #selector(filtrar(sender:)), for: .touchUpInside)
         self.view.addSubview(button)
+        
     }
     
     @objc func filtrar(sender: MDCButton){
         
+        self.pickerData.removeAll()
+        
+        for(key, values) in self.mapUsers{
+            self.pickerData.append(key)
+        }
         
         picker = UIPickerView.init()
         picker.delegate = self
@@ -96,18 +104,6 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                     self.mapUsers[user] = arr
                 }else{
                     self.mapUsers[user] = [servico]
-                    self.pickerData.append(user)
-                }
-                
-                
-                DispatchQueue.main.async {
-                    for(key, values) in self.mapUsers{
-                        
-                        for value in values {
-                            var servico = value as! ServiceFirebase
-                            print(servico.data)
-                        }
-                    }
                 }
             }
             
