@@ -167,7 +167,7 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
         
-        picker = UIPickerView.init()
+        /*picker = UIPickerView.init()
         picker.delegate = self
         picker.autoresizingMask = .flexibleWidth
         picker.backgroundColor = UIColor.white
@@ -179,7 +179,55 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
         toolBar = UIToolbar.init(frame: CGRect.init(x: 0.0, y: 60, width: UIScreen.main.bounds.size.width, height: 50))
         toolBar.barStyle = .default
         toolBar.items = [UIBarButtonItem.init(title: "Done", style: .done, target: self, action: #selector(onDoneButtonTapped))]
-        self.view.addSubview(toolBar)
+        self.view.addSubview(toolBar)*/
+        
+        let vc = UIViewController()
+        vc.preferredContentSize = CGSize(width: 250,height: 300)
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        vc.view.addSubview(pickerView)
+        let editRadiusAlert = UIAlertController(title: "Escolha o técnico", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        editRadiusAlert.setValue(vc, forKey: "contentViewController")
+        
+        let OKAction = UIAlertAction(title: "Confirmar", style: UIAlertActionStyle.default, handler: {
+            (_)in
+            let selected = pickerView.selectedRow(inComponent: 0)
+            
+            var userClicked: User!
+            
+            for u in self.user {
+                if(u.nome == self.pickerData[selected]){
+                    userClicked = u
+                    break
+                }
+            }
+            
+            let serviceSelected = self.services[self.serviceClicked].id
+            
+            let new_tecnico = [
+                "email" : userClicked.email,
+                "id": userClicked.id,
+                "nome": userClicked.nome,
+                "profile": userClicked.profile,
+                "tipo": userClicked.tipo,
+                "coordenadas": userClicked.coordenadas as Any
+                ] as [String : Any]
+            
+            
+            Database.database().reference().child("servico").child(serviceSelected!).updateChildValues(["tecnico": new_tecnico], withCompletionBlock: {error, ref in
+                if error != nil{
+                    print("ERROR")
+                }else{
+                    //self.getUsers()
+                }
+            } )
+            
+        })
+        
+        editRadiusAlert.addAction(OKAction)
+        editRadiusAlert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        self.present(editRadiusAlert, animated: true)
     }
     
     @objc func cancelar(sender: MDCButton){
@@ -212,10 +260,8 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
             "tipo": userClicked.tipo,
             "coordenadas": userClicked.coordenadas as Any
             ] as [String : Any]
+    
         
-        print(userClicked.coordenadas)
-        
-        //Database.database().reference().child("servico").child(serviceSelected!).updateChildValues(["tecnico": new_tecnico])
         Database.database().reference().child("servico").child(serviceSelected!).updateChildValues(["tecnico": new_tecnico], withCompletionBlock: {error, ref in
             if error != nil{
                 print("ERROR")
