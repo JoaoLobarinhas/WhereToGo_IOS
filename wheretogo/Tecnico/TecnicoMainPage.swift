@@ -40,12 +40,33 @@ class TecnicoMainPage: UITabBarController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getUrlImage()
         self.navigationItem.setHidesBackButton(true, animated: true)
         let btnLogOut = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(TecnicoMainPage.logOut))
         self.navigationItem.rightBarButtonItem = btnLogOut
-        let image = UIImage(named: "map_blue")
-        let imageView = UIImageView(image: image)
-        self.navigationItem.titleView = imageView
+        getUrlImage()
+    }
+    
+    func getUrlImage(){
+        
+        Database.database().reference().child("users").queryOrdered(byChild: "id").queryEqual(toValue: Auxiliar.userLoged).observe(.childAdded, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                
+                let urlImage = dictionary["profile"] as! String
+                let image = UIImage(named: "user")
+                let imageView = UIImageView(image: image)
+                imageView.layer.cornerRadius = 15
+                imageView.layer.masksToBounds = true
+                imageView.loadImageUsingCacheWithUrlString(urlString: urlImage)
+                self.navigationItem.titleView = imageView
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        
     }
     
     @IBAction func logOut() {
