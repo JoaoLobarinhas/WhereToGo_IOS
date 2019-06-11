@@ -26,21 +26,20 @@ class AdminMainPage: UITabBarController {
         tabBarIteam.selectedImage = selectedImageAssign
         tabBarIteam.title = "Serviços"
         
-        let selectedImageAdd = UIImage(named: "map_blue")?.withRenderingMode(.alwaysOriginal)
-        let DeSelectedImageAdd = UIImage(named: "map_grey")?.withRenderingMode(.alwaysOriginal)
+        let selectedImageMap = UIImage(named: "map_blue")?.withRenderingMode(.alwaysOriginal)
+        let DeSelectedImageMap = UIImage(named: "map_grey")?.withRenderingMode(.alwaysOriginal)
         tabBarIteam = (self.tabBar.items?[1])!
-        tabBarIteam.image = DeSelectedImageAdd
-        tabBarIteam.selectedImage = selectedImageAdd
+        tabBarIteam.image = DeSelectedImageMap
+        tabBarIteam.selectedImage = selectedImageMap
         tabBarIteam.title = "Mapa"
         
-        
-        
-        /*let selectedImageAdds = UIImage(named: "logout_blue")?.withRenderingMode(.alwaysOriginal)
-        let DeSelectedImageAdds = UIImage(named: "logout_grey")?.withRenderingMode(.alwaysOriginal)
+        let selectedImageAdd = UIImage(named: "add_blue")?.withRenderingMode(.alwaysOriginal)
+        let DeSelectedImageAdd = UIImage(named: "add_grey")?.withRenderingMode(.alwaysOriginal)
         tabBarIteam = (self.tabBar.items?[2])!
-        tabBarIteam.image = DeSelectedImageAdds
-        tabBarIteam.selectedImage = selectedImageAdds
-        tabBarIteam.title = "Logout"*/
+        tabBarIteam.image = DeSelectedImageAdd
+        tabBarIteam.selectedImage = selectedImageAdd
+        tabBarIteam.title = "Adicionar"
+        
         
         // initaial tab bar index
         self.selectedIndex = 0

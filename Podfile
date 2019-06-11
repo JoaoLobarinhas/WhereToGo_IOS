@@ -15,4 +15,6 @@ pod 'MaterialComponents/Buttons'
 pod 'MaterialComponents/Buttons+Theming'
 pod 'GoogleMaps'
 pod 'GooglePlaces'
+pod 'MaterialComponents/TextFields'
+pod 'MaterialComponents/TextFields+Theming'
 end
