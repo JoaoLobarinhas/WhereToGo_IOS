@@ -103,6 +103,7 @@ PODS:
     - MaterialComponents/schemes/Typography
   - MaterialComponents/Ink (84.5.0):
     - MaterialComponents/private/Math
+  - MaterialComponents/Palettes (84.5.0)
   - MaterialComponents/private/Application (84.5.0)
   - MaterialComponents/private/Math (84.5.0)
   - MaterialComponents/Ripple (84.5.0):
@@ -127,6 +128,26 @@ PODS:
   - MaterialComponents/Shapes (84.5.0):
     - MaterialComponents/private/Math
     - MaterialComponents/ShadowLayer
+  - MaterialComponents/TextFields (84.5.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Palettes
+    - MaterialComponents/private/Math
+    - MaterialComponents/Typography
+    - MDFInternationalization
+  - "MaterialComponents/TextFields+ColorThemer (84.5.0)":
+    - MaterialComponents/TextFields
+    - MaterialComponents/Themes
+  - "MaterialComponents/TextFields+Theming (84.5.0)":
+    - MaterialComponents/schemes/Container
+    - MaterialComponents/TextFields
+    - "MaterialComponents/TextFields+ColorThemer"
+    - "MaterialComponents/TextFields+TypographyThemer"
+  - "MaterialComponents/TextFields+TypographyThemer (84.5.0)":
+    - MaterialComponents/schemes/Typography
+    - MaterialComponents/TextFields
+  - MaterialComponents/Themes (84.5.0):
+    - MaterialComponents/schemes/Color
+    - MaterialComponents/schemes/Typography
   - MaterialComponents/Typography (84.5.0):
     - MaterialComponents/private/Application
     - MaterialComponents/private/Math
@@ -148,6 +169,8 @@ DEPENDENCIES:
   - GooglePlaces
   - MaterialComponents/Buttons
   - "MaterialComponents/Buttons+Theming"
+  - MaterialComponents/TextFields
+  - "MaterialComponents/TextFields+Theming"
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -192,6 +215,6 @@ SPEC CHECKSUMS:
   MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
 
-PODFILE CHECKSUM: 8275d4c25d2f1033aed0f828af418aa8294ab6d2
+PODFILE CHECKSUM: 2f36019c1b82ea4ab684c53964f03b231a8c627f
 
 COCOAPODS: 1.6.2
