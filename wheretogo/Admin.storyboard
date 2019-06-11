@@ -10,6 +10,33 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Item-->
+        <scene sceneID="rKc-CX-JcF">
+            <objects>
+                <viewController id="Qp6-Rq-692" customClass="AddServiceViewController" customModule="wheretogo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="F24-df-XYc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="kls-VF-pid">
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kls-VF-pid" firstAttribute="leading" secondItem="F24-df-XYc" secondAttribute="leading" id="WEm-6k-oGP"/>
+                            <constraint firstAttribute="trailing" secondItem="kls-VF-pid" secondAttribute="trailing" id="Y1o-fH-Hw7"/>
+                            <constraint firstItem="kls-VF-pid" firstAttribute="top" secondItem="VKp-te-rmz" secondAttribute="top" id="hBH-hJ-eSN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VKp-te-rmz"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="0yJ-N4-GNO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G90-ek-Hdq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1649" y="-308"/>
+        </scene>
         <!--Item 2-->
         <scene sceneID="bcL-p9-LWa">
             <objects>
@@ -24,7 +51,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OyP-c8-j1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="940" y="23"/>
+            <point key="canvasLocation" x="940" y="140"/>
         </scene>
         <!--Item 1-->
         <scene sceneID="BuO-Df-Qbp">
@@ -158,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rJz-40-05o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="940" y="-749.7751124437782"/>
+            <point key="canvasLocation" x="940" y="-767"/>
         </scene>
         <!--Admin Main Page-->
         <scene sceneID="itp-aL-zYB">
@@ -172,6 +199,7 @@
                     <connections>
                         <segue destination="umU-ar-LYg" kind="relationship" relationship="viewControllers" id="1Ku-wf-WlE"/>
                         <segue destination="h8Z-L6-gYF" kind="relationship" relationship="viewControllers" id="9bf-OV-Uhq"/>
+                        <segue destination="Qp6-Rq-692" kind="relationship" relationship="viewControllers" id="SSg-Ev-a4j"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8vB-v7-vUr" userLabel="First Responder" sceneMemberID="firstResponder"/>
