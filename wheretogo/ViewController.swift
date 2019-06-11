@@ -82,11 +82,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 Database.database().reference().child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     self.loader.isHidden = true
-                    let value = snapshot.value as? NSDictionary
+                    let value = snapshot.value as? [String: AnyObject]
                     let tipo = value?["tipo"] as? String ?? ""
                     let profile = value?["profile"] as? String ?? ""
-                    print(profile)
+                    let userLat = value?["coordenadas"]?["latitude"] as! NSNumber
+                    let userLng = value?["coordenadas"]?["longitude"] as! NSNumber
                     
+                    Auxiliar.userLat = userLat.stringValue
+                    Auxiliar.userLng = userLng.stringValue
                     Auxiliar.userLoged = userID!
                     Auxiliar.userProfile = profile
                     
