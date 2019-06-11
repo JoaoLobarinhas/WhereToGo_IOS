@@ -43,6 +43,9 @@ class TecnicoMainPage: UITabBarController{
         self.navigationItem.setHidesBackButton(true, animated: true)
         let btnLogOut = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(TecnicoMainPage.logOut))
         self.navigationItem.rightBarButtonItem = btnLogOut
+        let image = UIImage(named: "map_blue")
+        let imageView = UIImageView(image: image)
+        self.navigationItem.titleView = imageView
     }
     
     @IBAction func logOut() {
