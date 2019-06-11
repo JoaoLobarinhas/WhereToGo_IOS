@@ -158,6 +158,7 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - SkyFloatingLabelTextField (3.7.0)
 
 DEPENDENCIES:
   - CodableFirebase
@@ -171,6 +172,7 @@ DEPENDENCIES:
   - "MaterialComponents/Buttons+Theming"
   - MaterialComponents/TextFields
   - "MaterialComponents/TextFields+Theming"
+  - SkyFloatingLabelTextField (~> 3.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -193,6 +195,7 @@ SPEC REPOS:
     - MDFInternationalization
     - MDFTextAccessibility
     - nanopb
+    - SkyFloatingLabelTextField
 
 SPEC CHECKSUMS:
   CodableFirebase: 0bf201991eeec35eb9fcd987d271ea463cf34a80
@@ -214,7 +217,8 @@ SPEC CHECKSUMS:
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
 
-PODFILE CHECKSUM: 2f36019c1b82ea4ab684c53964f03b231a8c627f
+PODFILE CHECKSUM: d123eeaa670f9559725573d78017595a29ad23a2
 
 COCOAPODS: 1.6.2
