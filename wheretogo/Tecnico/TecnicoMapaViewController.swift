@@ -24,18 +24,8 @@ class TecnicoMapaViewController: UIViewController{
         
         view = mapView
         
-        let path = GMSMutablePath()
-        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.0))
-        path.add(CLLocationCoordinate2D(latitude: 37.45, longitude: -122.0))
-        path.add(CLLocationCoordinate2D(latitude: 37.45, longitude: -122.2))
-        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.2))
-        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.0))
-        
-        let rectangle = GMSPolyline(path: path)
-        rectangle.map = mapView
-        
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude:(Auxiliar.userLat.toDouble())!, longitude: (Auxiliar.userLng.toDouble())!))
-        marker.title = "TESTE"
+        marker.title = "Utilizador"
         marker.map = mapView
         
     }
