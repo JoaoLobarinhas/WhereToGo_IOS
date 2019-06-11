@@ -17,4 +17,5 @@ pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'MaterialComponents/TextFields'
 pod 'MaterialComponents/TextFields+Theming'
+pod 'SkyFloatingLabelTextField', '~> 3.0'
 end

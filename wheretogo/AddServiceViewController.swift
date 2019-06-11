@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import MaterialComponents.MaterialTextFields_Theming
+import MaterialComponents.MaterialContainerScheme
 
 class AddServiceViewController: UIViewController {
 
+    let containerScheme = MDCContainerScheme()
+    
+    @IBOutlet weak var searchMorada: MDCTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        searchMorada.placeholder = "Morada"
+        searchMorada.cursorColor = UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
         // Do any additional setup after loading the view.
     }
 

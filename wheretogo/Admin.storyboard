@@ -18,24 +18,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="kls-VF-pid">
-                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lRb-Wt-O0u" customClass="MDCTextField">
+                                <rect key="frame" x="52" y="59" width="270" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="kls-VF-pid" firstAttribute="leading" secondItem="F24-df-XYc" secondAttribute="leading" id="WEm-6k-oGP"/>
-                            <constraint firstAttribute="trailing" secondItem="kls-VF-pid" secondAttribute="trailing" id="Y1o-fH-Hw7"/>
-                            <constraint firstItem="kls-VF-pid" firstAttribute="top" secondItem="VKp-te-rmz" secondAttribute="top" id="hBH-hJ-eSN"/>
+                            <constraint firstItem="lRb-Wt-O0u" firstAttribute="centerX" secondItem="F24-df-XYc" secondAttribute="centerX" id="2Ji-5X-D11"/>
+                            <constraint firstItem="lRb-Wt-O0u" firstAttribute="top" secondItem="VKp-te-rmz" secondAttribute="top" constant="39" id="HnH-YO-cVa"/>
+                            <constraint firstItem="lRb-Wt-O0u" firstAttribute="leading" secondItem="VKp-te-rmz" secondAttribute="leading" constant="52" id="zcS-5p-EqR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VKp-te-rmz"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="0yJ-N4-GNO"/>
+                    <connections>
+                        <outlet property="searchMorada" destination="lRb-Wt-O0u" id="82q-yy-pBl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G90-ek-Hdq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1649" y="-308"/>
+            <point key="canvasLocation" x="1648.8" y="-308.09595202398805"/>
         </scene>
         <!--Item 2-->
         <scene sceneID="bcL-p9-LWa">
