@@ -15,6 +15,10 @@ class TecnicoMapaViewController: UIViewController{
     
     var latUser:String?
     var lngUser:String?
+    var services:[ServiceFirebase] = [ServiceFirebase]()
+    
+    let date = Date()
+    var formatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +32,38 @@ class TecnicoMapaViewController: UIViewController{
         marker.title = "Utilizador"
         marker.map = mapView
         
+        formatter.dateFormat = "dd-MM-yyyy"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        let todayString = self.formatter.string(from: date)
+        getServicos(todayDate: todayString)
+        
+        
+        
     }
     
     func centerMap(location: CLLocation) {
         //let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 1500, 1500)
         //mapView.setRegion(coordinateRegion,animated: true)
+    }
+    
+    func getServicos(todayDate: String){
+        Database.database().reference().child("servico").queryOrdered(byChild: "data").queryOrdered(byChild: todayDate).observe(.childAdded, with: { (snapshot) in
+            
+            
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                
+                if dictionary["tecnico"]?["id"] as! String == Auxiliar.userLoged {
+                    let servico = ServiceFirebase(dictionary: dictionary)
+                    self.services.append(servico)
+                    
+                }
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
     }
     
     func drawRoute(map : GMSMapView){
