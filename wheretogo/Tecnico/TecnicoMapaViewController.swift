@@ -49,7 +49,10 @@ class TecnicoMapaViewController: UIViewController{
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 
+                print(dictionary)
                 
+                self.latUser = dictionary["coordenadas"]!["latitude"] as! String
+                self.lngUser = dictionary["coordenadas"]!["longitude"] as! String
                 
             }
             
