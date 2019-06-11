@@ -14,6 +14,7 @@ class User: NSObject {
     var nome: String?
     var profile: String?
     var tipo: String?
+    var coordenadas: NSObject?
     
     init(dictionary: [String: AnyObject]) {
         
@@ -23,6 +24,7 @@ class User: NSObject {
         nome = dictionary["nome"] as? String
         profile = dictionary["profile"] as? String
         tipo = dictionary["tipo"] as? String
+        coordenadas = dictionary["coordenadas"] as? NSObject
     }
     
 }

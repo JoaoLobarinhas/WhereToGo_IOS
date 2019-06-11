@@ -9,9 +9,22 @@
 import UIKit
 import MapKit
 import GoogleMaps
+import MaterialComponents.MaterialButtons
+import Firebase
+import FirebaseDatabase
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource{
+    
 
+    
+    let date = Date()
+    var formatter = DateFormatter()
+    
+    var pickerData: [String] = [String]()
+    var toolBar = UIToolbar()
+    var picker  = UIPickerView()
+    
+    var mapUsers = Dictionary<String, Array<ServiceFirebase>>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,31 +34,90 @@ class MapViewController: UIViewController {
         
         view = mapView
         
-        
-        let path = GMSMutablePath()
-        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.0))
-        path.add(CLLocationCoordinate2D(latitude: 37.45, longitude: -122.0))
-        path.add(CLLocationCoordinate2D(latitude: 37.45, longitude: -122.2))
-        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.2))
-        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.0))
-        
-        let rectangle = GMSPolyline(path: path)
-        rectangle.map = mapView
-        
-        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude:41.701497 , longitude: -8.834756))
-        marker.title = "TESTE"
-        marker.map = mapView
+        formatter.dateFormat = "dd-MM-yyyy"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        let todayString = self.formatter.string(from: date)
+        getAllServices(todayDate: todayString)
         
         
-        drawRoute(map: mapView)
-        // Do any additional setup after loading the view.
+        //drawRoute(map: mapView)
+        
+        let button = MDCButton()
+        let width = UIScreen.main.bounds.size.width/2
+        let x = UIScreen.main.bounds.size.width/2 - width/2
+        let y = (self.tabBarController?.tabBar.frame.height)! + 20;
+        
+        
+        button.frame = CGRect(x: x, y: y , width: width, height: 30)
+        button.setTitle("Filtrar técnico", for: UIControlState.normal)
+        button.setImage(UIImage(named: "filter"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: -20)
+        
+        button.isUppercaseTitle = false;
+        let containerScheme = MDCContainerScheme()
+        containerScheme.colorScheme.primaryColor = UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+        button.applyContainedTheme(withScheme: containerScheme)
+        button.addTarget(self, action: #selector(filtrar(sender:)), for: .touchUpInside)
+        self.view.addSubview(button)
     }
     
-    func centerMap(location: CLLocation) {
-        //let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 1500, 1500)
-        //mapView.setRegion(coordinateRegion,animated: true)
+    @objc func filtrar(sender: MDCButton){
+        
+        
+        picker = UIPickerView.init()
+        picker.delegate = self
+        picker.autoresizingMask = .flexibleWidth
+        picker.backgroundColor = UIColor.white
+        picker.setValue(UIColor.black, forKey: "textColor")
+        picker.contentMode = .center
+        picker.frame = CGRect.init(x: 0.0, y: 0.0,  width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
+        self.view.addSubview(picker)
+        
+        toolBar = UIToolbar.init(frame: CGRect.init(x: 0.0, y: 60, width: UIScreen.main.bounds.size.width, height: 50))
+        toolBar.barStyle = .default
+        toolBar.items = [UIBarButtonItem.init(title: "Done", style: .done, target: self, action: #selector(onDoneButtonTapped))]
+        self.view.addSubview(toolBar)
     }
     
+    func getAllServices(todayDate : String){
+        
+        
+        Database.database().reference().child("servico").queryOrdered(byChild: "data").queryEqual(toValue: todayDate).observe(.childAdded, with: { (snapshot) in
+            
+            
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                let servico = ServiceFirebase(dictionary: dictionary)
+                let user = dictionary["tecnico"]?["nome"] as! String
+                
+                if var arr = self.mapUsers[user] {
+                    arr.append(servico)
+                    self.mapUsers[user] = arr
+                }else{
+                    self.mapUsers[user] = [servico]
+                    self.pickerData.append(user)
+                }
+                
+                
+                DispatchQueue.main.async {
+                    for(key, values) in self.mapUsers{
+                        
+                        for value in values {
+                            var servico = value as! ServiceFirebase
+                            print(servico.data)
+                        }
+                    }
+                }
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+    }
+    
+
     func drawRoute(map : GMSMapView){
         let origin = "\(41.697607),\(-8.849940)"
         let destination = "\(41.695732),\(-8.849264)"
@@ -94,12 +166,28 @@ class MapViewController: UIViewController {
                 print("ERRO")
                 print(parsingError)
             }
-            
-            /*let json = JSON(data: response.data!)
-            
-            
-            */
         }.resume()
+    }
+    
+    
+    @objc func onDoneButtonTapped() {
+        toolBar.removeFromSuperview()
+        picker.removeFromSuperview()
+        let selected = picker.selectedRow(inComponent: 0)
+        print(selected)
+    }
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,15 +195,5 @@ class MapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
