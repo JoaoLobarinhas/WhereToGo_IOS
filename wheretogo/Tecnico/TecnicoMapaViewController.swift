@@ -13,8 +13,12 @@ import GoogleMaps
 
 class TecnicoMapaViewController: UIViewController{
     
-    var latUser:String?
-    var lngUser:String?
+    var services:[ServiceFirebase] = [ServiceFirebase]()
+    
+    let date = Date()
+    var formatter = DateFormatter()
+    
+    var map_view = GMSMapView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,35 +28,66 @@ class TecnicoMapaViewController: UIViewController{
         
         view = mapView
         
-        let path = GMSMutablePath()
-        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.0))
-        path.add(CLLocationCoordinate2D(latitude: 37.45, longitude: -122.0))
-        path.add(CLLocationCoordinate2D(latitude: 37.45, longitude: -122.2))
-        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.2))
-        path.add(CLLocationCoordinate2D(latitude: 37.36, longitude: -122.0))
-        
-        let rectangle = GMSPolyline(path: path)
-        rectangle.map = mapView
+       self.map_view = mapView
         
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude:(Auxiliar.userLat.toDouble())!, longitude: (Auxiliar.userLng.toDouble())!))
-        marker.title = "TESTE"
-        marker.map = mapView
+        marker.title = "Utilizador"
+        marker.map = self.map_view
+        
+        formatter.dateFormat = "dd-MM-yyyy"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        let todayString = self.formatter.string(from: date)
+        
+        getServicos(todayDate: todayString)
+        
+        
         
     }
     
-    func centerMap(location: CLLocation) {
-        //let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 1500, 1500)
-        //mapView.setRegion(coordinateRegion,animated: true)
+    
+    func getServicos(todayDate: String){
+        
+        
+        Database.database().reference().child("servico").queryOrdered(byChild: "data").queryOrdered(byChild: todayDate).observe(.childAdded, with: { (snapshot) in
+            
+            
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                
+                print(dictionary)
+                
+                if dictionary["tecnico"]?["id"] as! String == Auxiliar.userLoged {
+                    let servico = ServiceFirebase(dictionary: dictionary)
+                    self.services.append(servico)
+    
+                }
+                
+                //DispatchQueue.main.async {
+                    //self.drawRoute()
+                //}
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
     }
     
-    func drawRoute(map : GMSMapView){
-        let origin = "\(41.697607),\(-8.849940)"
-        let destination = "\(41.695732),\(-8.849264)"
-        let urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=AIzaSyAOEfIHh-VYr8V73LmBo_ubiQrOeMdgPaE"
+    func drawRoute(){
+        var coordenadasString:String = ""
+        for s in self.services{
+            var latitude = s.coordenadas?.value(forKey: "latitude") as? NSNumber
+            var longitude = s.coordenadas?.value(forKey: "longitude") as? NSNumber
+            coordenadasString += (latitude?.stringValue)!
+            coordenadasString += ","
+            coordenadasString += (longitude?.stringValue)!
+            coordenadasString += "|"
+        }
+        var newUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="+Auxiliar.userLat+","+Auxiliar.userLng+"&destination=41.697412,-8.841945&waypoints=optimize:true|"
+            + coordenadasString +
+        "&key=AIzaSyAOEfIHh-VYr8V73LmBo_ubiQrOeMdgPaE"
         
-        var newUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=41.697131,-8.835841&destination=41.697412,-8.841945&waypoints=optimize:true|41.693257,-8.846853|41.690134,-8.830279|41.694667,-8.833592|41.695114,-8.820588|41.701545,-8.835176&key=AIzaSyAOEfIHh-VYr8V73LmBo_ubiQrOeMdgPaE"
-        
-        
+        self.map_view.clear()
         let url = URL(string: newUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
         
         
@@ -78,9 +113,9 @@ class TecnicoMapaViewController: UIViewController{
                                 let path = GMSPath.init(fromEncodedPath: points!)
                                 
                                 let polyline = GMSPolyline(path: path)
-                                polyline.strokeColor = .red
-                                polyline.strokeWidth = 10.0
-                                polyline.map = map
+                                polyline.strokeColor = UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+                                polyline.strokeWidth = 5.0
+                                polyline.map = self.map_view
                             }
                             
                         }
@@ -93,11 +128,6 @@ class TecnicoMapaViewController: UIViewController{
                 print("ERRO")
                 print(parsingError)
             }
-            
-            /*let json = JSON(data: response.data!)
-             
-             
-             */
             }.resume()
     }
     
