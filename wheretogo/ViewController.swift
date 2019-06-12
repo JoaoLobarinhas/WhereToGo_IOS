@@ -31,7 +31,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Database.database().isPersistenceEnabled = true
+        
         Database.database().reference().keepSynced(true)
         
         
