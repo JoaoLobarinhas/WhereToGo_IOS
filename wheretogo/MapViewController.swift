@@ -29,6 +29,9 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     var services: Array<ServiceFirebase> = Array<ServiceFirebase>()
     var coordenadas:String? = ""
     
+    var latitudeUser = 0.0
+    var longitudeUser = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.picker.delegate = self
@@ -94,6 +97,11 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             let user = self.pickerData[selected]
         
             self.services = self.mapUsers[user]!
+            var coordenadasUser = self.services.first?.tecnico?.value(forKey: "coordenadas") as? NSObject
+            self.latitudeUser = coordenadasUser?.value(forKey: "latitude") as! Double
+            self.longitudeUser = coordenadasUser?.value(forKey: "longitude") as! Double
+            
+            print(self.latitudeUser)
             var coordenadasString = ""
             for s in self.services {
                 var latitude = s.coordenadas?.value(forKey: "latitude") as? NSNumber
@@ -138,18 +146,27 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         }
         
     }
+
     
 
     func drawRoute(){
-        let origin = "\(41.697607),\(-8.849940)"
         let destination = "\(41.695732),\(-8.849264)"
-        
-        var newUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=41.697131,-8.835841&destination=41.697412,-8.841945&waypoints=optimize:true|"
+        let origin = "\(self.latitudeUser),\(self.longitudeUser)"
+        var newUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&waypoints=optimize:true|"
             + self.coordenadas! +
         "&key=AIzaSyAOEfIHh-VYr8V73LmBo_ubiQrOeMdgPaE"
         
         self.map_view.clear()
         let url = URL(string: newUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+        
+        
+        let markerOrigem = GMSMarker(position: CLLocationCoordinate2D(latitude: self.latitudeUser, longitude: self.longitudeUser))
+        markerOrigem.title = "Origem"
+        markerOrigem.map = self.map_view
+        
+        let markerDestino = GMSMarker(position: CLLocationCoordinate2D(latitude: 41.695732, longitude: -8.849264))
+        markerDestino.title = "Destino"
+        markerDestino.map = self.map_view
 
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
@@ -177,6 +194,8 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                                 polyline.strokeColor = UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
                                 polyline.strokeWidth = 5.0
                                 polyline.map = self.map_view
+                                
+                                
                             }
                             
                         }

@@ -127,7 +127,11 @@ class AdminViewController: UIViewController, UITableViewDataSource, UITableViewD
         let ec:ServiceFirebase = services[indexPath.row]
         cell.labelData.text = ec.data;
         cell.labelMorada.text = ec.morada;
-        cell.labelEstado.text = ec.estado;
+        if(ec.estado == "Pendente_por_aceitar"){
+            cell.labelEstado.text = "Por aceitar";
+        }else{
+            cell.labelEstado.text = ec.estado
+        }
         cell.labelDesc.text = ec.descricao;
         cell.imageUser.image = UIImage(named: "user")
         

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2C4-v2-m7n">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,39 +15,80 @@
             <objects>
                 <viewController id="Qp6-Rq-692" customClass="AddServiceViewController" customModule="wheretogo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F24-df-XYc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lRb-Wt-O0u" customClass="MDCTextField">
-                                <rect key="frame" x="52" y="59" width="270" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lRb-Wt-O0u" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                <rect key="frame" x="52" y="59" width="216" height="39"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="searchMorada:" destination="Qp6-Rq-692" eventType="primaryActionTriggered" id="SKP-Jb-gAM"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hAH-YJ-MpF" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                <rect key="frame" x="52" y="118" width="216" height="39"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWc-jx-LJG" customClass="MDCButton">
+                                <rect key="frame" x="127.5" y="474" width="65" height="30"/>
+                                <state key="normal" title="Adicionar"/>
+                                <connections>
+                                    <action selector="addServico:" destination="Qp6-Rq-692" eventType="touchUpInside" id="JdY-88-uxj"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cnb-mb-k1e" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                <rect key="frame" x="52" y="177" width="216" height="39"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n0X-VH-5Ld">
+                                <rect key="frame" x="0.0" y="218" width="320" height="216"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="lRb-Wt-O0u" firstAttribute="centerX" secondItem="F24-df-XYc" secondAttribute="centerX" id="2Ji-5X-D11"/>
+                            <constraint firstItem="Cnb-mb-k1e" firstAttribute="centerX" secondItem="VKp-te-rmz" secondAttribute="centerX" id="4gE-hJ-eUE"/>
+                            <constraint firstItem="hAH-YJ-MpF" firstAttribute="leading" secondItem="lRb-Wt-O0u" secondAttribute="leading" id="58u-v2-Vjw"/>
+                            <constraint firstItem="KWc-jx-LJG" firstAttribute="centerX" secondItem="VKp-te-rmz" secondAttribute="centerX" id="Esd-8J-s6P"/>
+                            <constraint firstItem="hAH-YJ-MpF" firstAttribute="centerX" secondItem="VKp-te-rmz" secondAttribute="centerX" id="FW0-QE-kEB"/>
                             <constraint firstItem="lRb-Wt-O0u" firstAttribute="top" secondItem="VKp-te-rmz" secondAttribute="top" constant="39" id="HnH-YO-cVa"/>
+                            <constraint firstItem="Cnb-mb-k1e" firstAttribute="width" secondItem="hAH-YJ-MpF" secondAttribute="width" id="TeR-wE-HeX"/>
+                            <constraint firstItem="hAH-YJ-MpF" firstAttribute="trailing" secondItem="lRb-Wt-O0u" secondAttribute="trailing" id="XTt-CL-Wm3"/>
+                            <constraint firstItem="Cnb-mb-k1e" firstAttribute="top" secondItem="hAH-YJ-MpF" secondAttribute="bottom" constant="20" id="bCg-OG-End"/>
+                            <constraint firstItem="n0X-VH-5Ld" firstAttribute="leading" secondItem="VKp-te-rmz" secondAttribute="leading" id="fHS-Or-2Ja"/>
+                            <constraint firstItem="VKp-te-rmz" firstAttribute="trailing" secondItem="n0X-VH-5Ld" secondAttribute="trailing" id="nac-yu-LS8"/>
+                            <constraint firstItem="VKp-te-rmz" firstAttribute="bottom" secondItem="KWc-jx-LJG" secondAttribute="bottom" constant="15" id="oGj-vB-CBw"/>
+                            <constraint firstItem="hAH-YJ-MpF" firstAttribute="top" secondItem="lRb-Wt-O0u" secondAttribute="bottom" constant="20" id="qBJ-ur-VLB"/>
+                            <constraint firstItem="n0X-VH-5Ld" firstAttribute="top" secondItem="Cnb-mb-k1e" secondAttribute="bottom" constant="2" id="tEV-I3-x37"/>
                             <constraint firstItem="lRb-Wt-O0u" firstAttribute="leading" secondItem="VKp-te-rmz" secondAttribute="leading" constant="52" id="zcS-5p-EqR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VKp-te-rmz"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="0yJ-N4-GNO"/>
                     <connections>
-                        <outlet property="searchMorada" destination="lRb-Wt-O0u" id="82q-yy-pBl"/>
+                        <outlet property="addButton" destination="KWc-jx-LJG" id="JxS-N7-8FI"/>
+                        <outlet property="contato" destination="Cnb-mb-k1e" id="ScP-Gc-2Z6"/>
+                        <outlet property="desc" destination="hAH-YJ-MpF" id="fTE-W1-iZN"/>
+                        <outlet property="pickerView" destination="n0X-VH-5Ld" id="LQm-d8-Ygs"/>
+                        <outlet property="searchText" destination="lRb-Wt-O0u" id="Loa-sY-ChP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G90-ek-Hdq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1648.8" y="-308.09595202398805"/>
+            <point key="canvasLocation" x="1835.625" y="-301.05633802816902"/>
         </scene>
         <!--Item 2-->
         <scene sceneID="bcL-p9-LWa">
             <objects>
                 <viewController id="h8Z-L6-gYF" customClass="MapViewController" customModule="wheretogo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TN4-gD-hcN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="i8s-F2-eV7"/>
@@ -63,22 +104,22 @@
             <objects>
                 <viewController id="umU-ar-LYg" customClass="AdminViewController" customModule="wheretogo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U6S-jO-FqS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qNy-Hu-OxM">
-                                <rect key="frame" x="0.0" y="50" width="375" height="568"/>
+                                <rect key="frame" x="0.0" y="50" width="320" height="469"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="158" id="mrA-Bz-Ayf" customClass="ServicesAdminTableViewCell" customModule="wheretogo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="158"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="158"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mrA-Bz-Ayf" id="IhW-tr-obP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="157.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="157.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1AX-Pe-Zba">
-                                                    <rect key="frame" x="303" y="12" width="60" height="60"/>
+                                                    <rect key="frame" x="248" y="12" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="FrS-Pm-9Nx"/>
                                                         <constraint firstAttribute="width" constant="60" id="eXF-3w-Nde"/>
@@ -112,7 +153,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cg4-VG-nqc">
-                                                    <rect key="frame" x="15" y="15" width="260" height="17"/>
+                                                    <rect key="frame" x="15" y="15" width="205" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -124,13 +165,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUD-1E-WmP">
-                                                    <rect key="frame" x="15" y="69" width="160" height="17"/>
+                                                    <rect key="frame" x="15" y="69" width="105" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJg-0H-HZj">
-                                                    <rect key="frame" x="318" y="94" width="31" height="15"/>
+                                                    <rect key="frame" x="263" y="94" width="31" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
