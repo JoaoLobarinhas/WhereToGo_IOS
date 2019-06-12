@@ -228,8 +228,13 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             
             
             if(error != nil){
-                print("ERRO")
-                print(error?.localizedDescription)
+                let alert = UIAlertController(title: "Erro", message: error?.localizedDescription, preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                
+                self.present(alert, animated: true)
+                
+                return
             }
             
             do{
@@ -260,8 +265,13 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                     
                 }
             }catch let parsingError {
-                print("ERRO")
-                print(parsingError)
+                let alert = UIAlertController(title: "Erro", message: parsingError as! String, preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                
+                self.present(alert, animated: true)
+                
+                return
             }
         }.resume()
     }

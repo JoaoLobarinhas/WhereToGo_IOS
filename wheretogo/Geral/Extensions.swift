@@ -11,40 +11,32 @@ import UIKit
 let imageCache = NSCache<AnyObject, AnyObject>()
 
 extension UIImageView {
-    
-    
     func loadImageUsingCacheWithUrlString(urlString: String){
         
-        if let cachedImage = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
-            self.image = cachedImage
-            return
-        }
-        
         let url = URL(string: urlString)
-        let urlRequest = URLRequest(url: url!)
+        image = nil
         
-        // set up the session
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
+        let cache = URLCache.shared
+        let request = URLRequest(url: url!)
         
-        let task = session.dataTask(with: urlRequest) {
-            (data, response, error) in
-            
-            if error != nil {
-                print(error ?? "erro")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                if let downloadedImage = UIImage(data: data!){
-                    imageCache.setObject(downloadedImage, forKey: urlString as AnyObject)
-                    self.image = downloadedImage
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let data = cache.cachedResponse(for: request)?.data, let image = UIImage(data : data){
+                DispatchQueue.main.async {
+                    self.image = image
                 }
-
+            }else{
+                URLSession.shared.dataTask(with: request, completionHandler: {(data, response, error) in
+                    
+                    if let data = data, let response = response, (( response as? HTTPURLResponse)?.statusCode ?? 500) < 300, let image = UIImage(data: data){
+                        let cachedData = CachedURLResponse(response: response, data: data)
+                        cache.storeCachedResponse(cachedData, for: request)
+                        DispatchQueue.main.async {
+                            self.image = image
+                        }
+                    }
+                    
+                }).resume()
             }
-            
         }
-        
-        task.resume()
     }
 }

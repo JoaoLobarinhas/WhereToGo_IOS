@@ -26,8 +26,40 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Database.database().isPersistenceEnabled = true
+        Database.database().reference().keepSynced(true)
+        
+        
+        if Auth.auth().currentUser != nil {
+            let userID = Auth.auth().currentUser?.uid
+            Database.database().reference().child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                self.loader.isHidden = true
+                let value = snapshot.value as? [String: AnyObject]
+                let tipo = value?["tipo"] as? String ?? ""
+                let profile = value?["profile"] as? String ?? ""
+                let userLat = value?["coordenadas"]?["latitude"] as! NSNumber
+                let userLng = value?["coordenadas"]?["longitude"] as! NSNumber
+                
+                Auxiliar.userLat = userLat.stringValue
+                Auxiliar.userLng = userLng.stringValue
+                Auxiliar.userLoged = userID!
+                Auxiliar.userProfile = profile
+                
+                if(tipo == "Administrador"){
+                    self.performSegue(withIdentifier: "Segue_Admin", sender: self)
+                }else{
+                    self.performSegue(withIdentifier: "Tecnico_Segue", sender: self)
+                }
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+        }
         
         let containerScheme = MDCContainerScheme()
         containerScheme.colorScheme.primaryColor = UIColor.init(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
