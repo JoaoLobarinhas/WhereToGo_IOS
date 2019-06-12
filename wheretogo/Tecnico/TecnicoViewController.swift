@@ -79,8 +79,6 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
             
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 
-                print(dictionary)
-                
                 if dictionary["tecnico"]?["id"] as! String == Auxiliar.userLoged{
                     
                     let servicoUpdated = ServiceFirebase(dictionary: dictionary)
@@ -96,9 +94,9 @@ class TecnicoViewController: UIViewController,UITableViewDelegate, UITableViewDa
                                 break
                             }
                         }
-                        else if servicoUpdated.estado! as! String == "Pendente" || servicoUpdated.estado! as! String == "Pendente_por_aceitar" || servicoUpdated.estado! as! String == "Concluido"{
+                        /*else if servicoUpdated.estado! as! String == "Pendente" || servicoUpdated.estado! as! String == "Pendente_por_aceitar" || servicoUpdated.estado! as! String == "Concluido"{
                             self.services.append(servicoUpdated)
-                        }
+                        }*/
                     }
                     
                     DispatchQueue.main.async {

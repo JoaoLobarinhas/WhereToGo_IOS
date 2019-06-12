@@ -49,6 +49,7 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         let todayString = self.formatter.string(from: date)
         getAllServices(todayDate: todayString)
+        updateService(todayDate: todayString)
         
         
         //drawRoute(map: mapView)
@@ -101,7 +102,7 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             self.latitudeUser = coordenadasUser?.value(forKey: "latitude") as! Double
             self.longitudeUser = coordenadasUser?.value(forKey: "longitude") as! Double
             
-            print(self.latitudeUser)
+            self.map_view.clear()
             var coordenadasString = ""
             for s in self.services {
                 var latitude = s.coordenadas?.value(forKey: "latitude") as? NSNumber
@@ -110,6 +111,20 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                 coordenadasString += ","
                 coordenadasString += (longitude?.stringValue)!
                 coordenadasString += "|"
+                
+                var lat = s.coordenadas?.value(forKey: "latitude") as! Double
+                var lng = s.coordenadas?.value(forKey: "longitude") as! Double
+                
+                let markerIntermedio = GMSMarker(position: CLLocationCoordinate2D(latitude: lat, longitude: lng))
+                markerIntermedio.title = "Serviço " + s.estado!
+                
+                if(s.estado == "Concluido"){
+                    markerIntermedio.icon = GMSMarker.markerImage(with: UIColor.init(red: 135/255, green: 211/255, blue: 124/255, alpha: 1))
+                }else{
+                    markerIntermedio.icon = GMSMarker.markerImage(with: UIColor.init(red: 245/255, green: 171/255, blue: 53/255, alpha: 1))
+                }
+                
+                markerIntermedio.map = self.map_view
             }
             
             self.coordenadas = coordenadasString
@@ -146,6 +161,46 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         }
         
     }
+    
+    func updateService(todayDate : String){
+        
+        
+        Database.database().reference().child("servico").queryOrdered(byChild: "data").queryEqual(toValue: todayDate).observe(.childChanged, with: { (snapshot) in
+            
+            
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                let servico = ServiceFirebase(dictionary: dictionary)
+                let user = dictionary["tecnico"]?["nome"] as! String
+                var position = -1
+                
+                if var arr = self.mapUsers[user] {
+                    
+                    
+                    for i in 0..<arr.count{
+                        if(arr[i].id == servico.id){
+                            position = i
+                        }
+                    }
+                    
+                    if(position != -1){
+                        arr[position] = servico
+                    }else{
+                        arr.append(servico)
+                    }
+                    
+                    self.mapUsers[user] = arr
+                    
+                    
+                }else{
+                    self.mapUsers[user] = [servico]
+                }
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+    }
 
     
 
@@ -156,7 +211,7 @@ class MapViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             + self.coordenadas! +
         "&key=AIzaSyAOEfIHh-VYr8V73LmBo_ubiQrOeMdgPaE"
         
-        self.map_view.clear()
+        
         let url = URL(string: newUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
         
         
